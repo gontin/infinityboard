@@ -2,322 +2,47 @@
 
 {% block title %}Dashboard - Infinity School{% endblock %}
 
+{% block header_title %}Dashboard{% endblock %}
+
 {% block header %}
-<div class="nav-menu">
-    <a href="#" class="btn btn-secondary">🏠 Dashboard</a>
-    <a href="#" class="btn btn-secondary">👤 Perfil</a>
-    <a href="#" class="btn btn-secondary">📅 Calendário</a>
-    <a href="#" class="btn btn-secondary">📝 Anotações</a>
-    <a href="#" class="btn btn-secondary">🔔 Notificações</a>
-</div>
+<nav class="nav-menu">
+    <a href="#" class="btn btn-primary">Dashboard</a>
+    <a href="#" class="btn btn-secondary">Perfil</a>
+    <a href="#" class="btn btn-secondary">Calendário</a>
+    <a href="#" class="btn btn-secondary">Anotações</a>
+</nav>
 {% endblock %}
 
 {% block content %}
-    <div class="dashboard-welcome">
-        <h2>Bem-vindo(a), João Silva! 👋</h2>
-        <p class="text-muted">Aqui está seu painel de produtividade e organização da Infinity School.</p>
+<div class="welcome-section">
+    <h2>Bem-vindo ao Sistema</h2>
+    <p>Acesse suas funcionalidades principais</p>
+</div>
+
+<div class="dashboard-grid">
+    <div class="card">
+        <h3>Planilhas</h3>
+        <p>Acesse suas planilhas</p>
+        <a href="#" class="btn btn-primary">Acessar</a>
     </div>
-
-    <!-- Menu Central Dashboard -->
-    <div class="dashboard-grid">
-        <!-- Links para Planilhas e Sistemas -->
-        <div class="card">
-            <h3>📊 Planilhas e Documentos</h3>
-            <p class="text-muted mb-4">Acesse rapidamente suas planilhas do Google Drive</p>
-            <div class="btn-group">
-                <a href="https://drive.google.com" target="_blank" class="btn btn-primary">📈 Planilhas Google Drive</a>
-                <a href="#" class="btn btn-secondary">📋 Planejamento Pedagógico</a>
-                <a href="#" class="btn btn-secondary">✅ Lista de Chamada</a>
-            </div>
-        </div>
-
-        <!-- Portal do Aluno e Infinity App -->
-        <div class="card">
-            <h3>🎓 Sistemas Acadêmicos</h3>
-            <p class="text-muted mb-4">Acesse os sistemas principais da escola</p>
-            <div class="btn-group">
-                <a href="#" class="btn btn-primary">🏫 Portal do Aluno</a>
-                <a href="#" class="btn btn-secondary">📱 Infinity App</a>
-                <a href="#" class="btn btn-secondary">📚 Biblioteca Digital</a>
-            </div>
-        </div>
-
-        <!-- Calendário Interativo -->
-        <div class="card">
-            <h3>📅 Calendário Pessoal</h3>
-            <p class="text-muted mb-4">Organize suas tarefas e compromissos</p>
-            <div class="calendar-preview">
-                <div class="calendar-header">
-                    <button class="btn-nav" onclick="previousMonth()">‹</button>
-                    <span id="currentMonth">Janeiro 2025</span>
-                    <button class="btn-nav" onclick="nextMonth()">›</button>
-                </div>
-                <div class="calendar-grid" id="calendarGrid">
-                    <!-- Calendário será gerado via JavaScript -->
-                </div>
-            </div>
-            <div class="btn-group mt-4">
-                <button class="btn btn-primary" onclick="addTask()">➕ Nova Tarefa</button>
-                <button class="btn btn-secondary" onclick="viewMonth()">📅 Ver Mês Completo</button>
-            </div>
-        </div>
-
-        <!-- Checklist de Tarefas -->
-        <div class="card">
-            <h3>✅ Tarefas do Dia</h3>
-            <p class="text-muted mb-4">Suas tarefas pendentes para hoje</p>
-            <div class="task-list" id="taskList">
-                <div class="task-item">
-                    <input type="checkbox" id="task1" class="task-checkbox">
-                    <label for="task1" class="task-label">Preparar aula de matemática</label>
-                    <span class="task-category reuniao">Reunião</span>
-                </div>
-                <div class="task-item">
-                    <input type="checkbox" id="task2" class="task-checkbox">
-                    <label for="task2" class="task-label">Revisar provas do 3º ano</label>
-                    <span class="task-category entrega">Entrega</span>
-                </div>
-                <div class="task-item">
-                    <input type="checkbox" id="task3" class="task-checkbox">
-                    <label for="task3" class="task-label">Reunião com coordenação</label>
-                    <span class="task-category evento">Evento</span>
-                </div>
-            </div>
-            <button class="btn btn-primary mt-4" onclick="addNewTask()">➕ Adicionar Tarefa</button>
-        </div>
-
-        <!-- Notificações e Lembretes -->
-        <div class="card">
-            <h3>🔔 Notificações</h3>
-            <p class="text-muted mb-4">Lembretes e avisos importantes</p>
-            <div class="notification-list">
-                <div class="notification-item">
-                    <div class="notification-icon">⏰</div>
-                    <div class="notification-content">
-                        <strong>Reunião em 30 minutos</strong>
-                        <p class="text-muted">Reunião pedagógica - Sala 201</p>
-                    </div>
-                </div>
-                <div class="notification-item">
-                    <div class="notification-icon">📝</div>
-                    <div class="notification-content">
-                        <strong>Prazo de entrega</strong>
-                        <p class="text-muted">Relatório mensal - Até amanhã</p>
-                    </div>
-                </div>
-                <div class="notification-item">
-                    <div class="notification-icon">🎉</div>
-                    <div class="notification-content">
-                        <strong>Evento próximo</strong>
-                        <p class="text-muted">Feira de ciências - Sexta-feira</p>
-                    </div>
-                </div>
-            </div>
-            <button class="btn btn-secondary mt-4">Ver Todas</button>
-        </div>
-
-        <!-- Anotações Rápidas (Post-it Digital) -->
-        <div class="card">
-            <h3>📝 Anotações Rápidas</h3>
-            <p class="text-muted mb-4">Suas notas e lembretes pessoais</p>
-            <div class="notes-container" id="notesContainer">
-                <div class="note-item" style="background-color: #fef3c7;">
-                    <p>Lembrar de imprimir provas para segunda-feira</p>
-                    <button class="note-delete" onclick="deleteNote(this)">×</button>
-                </div>
-                <div class="note-item" style="background-color: #dbeafe;">
-                    <p>Comprar material para experimento de química</p>
-                    <button class="note-delete" onclick="deleteNote(this)">×</button>
-                </div>
-                <div class="note-item" style="background-color: #dcfce7;">
-                    <p>Agendar reunião com pais do aluno Pedro</p>
-                    <button class="note-delete" onclick="deleteNote(this)">×</button>
-                </div>
-            </div>
-            <div class="add-note-form">
-                <textarea id="newNote" placeholder="Digite sua anotação..." class="note-input"></textarea>
-                <div class="note-colors">
-                    <button class="color-btn" style="background-color: #fef3c7;" onclick="setNoteColor('#fef3c7')"></button>
-                    <button class="color-btn" style="background-color: #dbeafe;" onclick="setNoteColor('#dbeafe')"></button>
-                    <button class="color-btn" style="background-color: #dcfce7;" onclick="setNoteColor('#dcfce7')"></button>
-                    <button class="color-btn" style="background-color: #fce7f3;" onclick="setNoteColor('#fce7f3')"></button>
-                </div>
-                <button class="btn btn-primary" onclick="addNote()">➕ Adicionar Nota</button>
-            </div>
-        </div>
+    
+    <div class="card">
+        <h3>Sistemas</h3>
+        <p>Portal do aluno</p>
+        <a href="#" class="btn btn-primary">Acessar</a>
     </div>
-
-    <!-- Modal para adicionar tarefa -->
-    <div id="taskModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h3>Nova Tarefa</h3>
-            <form id="taskForm">
-                <input type="text" id="taskTitle" placeholder="Título da tarefa" required>
-                <input type="date" id="taskDate" required>
-                <select id="taskCategory">
-                    <option value="reuniao">Reunião</option>
-                    <option value="entrega">Entrega</option>
-                    <option value="evento">Evento</option>
-                    <option value="pessoal">Pessoal</option>
-                </select>
-                <textarea id="taskDescription" placeholder="Descrição (opcional)"></textarea>
-                <div class="modal-buttons">
-                    <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Salvar Tarefa</button>
-                </div>
-            </form>
-        </div>
+    
+    <div class="card">
+        <h3>Calendário</h3>
+        <p>Organize suas tarefas</p>
+        <a href="#" class="btn btn-primary">Ver Calendário</a>
     </div>
-
-    <script>
-        // Variáveis globais
-        let currentDate = new Date();
-        let selectedNoteColor = '#fef3c7';
-
-        // Inicialização
-        document.addEventListener('DOMContentLoaded', function() {
-            generateCalendar();
-            loadTasks();
-        });
-
-        // Funções do calendário
-        function generateCalendar() {
-            const calendar = document.getElementById('calendarGrid');
-            const monthYear = document.getElementById('currentMonth');
-            
-            const year = currentDate.getFullYear();
-            const month = currentDate.getMonth();
-            
-            monthYear.textContent = new Intl.DateTimeFormat('pt-BR', { 
-                month: 'long', 
-                year: 'numeric' 
-            }).format(currentDate);
-            
-            // Limpar calendário
-            calendar.innerHTML = '';
-            
-            // Cabeçalho dos dias da semana
-            const daysOfWeek = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
-            daysOfWeek.forEach(day => {
-                const dayElement = document.createElement('div');
-                dayElement.className = 'calendar-day-header';
-                dayElement.textContent = day;
-                calendar.appendChild(dayElement);
-            });
-            
-            // Primeiro dia do mês
-            const firstDay = new Date(year, month, 1);
-            const lastDay = new Date(year, month + 1, 0);
-            const startDate = new Date(firstDay);
-            startDate.setDate(startDate.getDate() - firstDay.getDay());
-            
-            // Gerar dias
-            for (let i = 0; i < 42; i++) {
-                const date = new Date(startDate);
-                date.setDate(startDate.getDate() + i);
-                
-                const dayElement = document.createElement('div');
-                dayElement.className = 'calendar-day';
-                dayElement.textContent = date.getDate();
-                
-                if (date.getMonth() !== month) {
-                    dayElement.classList.add('other-month');
-                }
-                
-                if (date.toDateString() === new Date().toDateString()) {
-                    dayElement.classList.add('today');
-                }
-                
-                // Adicionar eventos fictícios
-                if (Math.random() > 0.8) {
-                    const event = document.createElement('div');
-                    event.className = 'calendar-event';
-                    event.textContent = '•';
-                    dayElement.appendChild(event);
-                }
-                
-                calendar.appendChild(dayElement);
-            }
-        }
-
-        function previousMonth() {
-            currentDate.setMonth(currentDate.getMonth() - 1);
-            generateCalendar();
-        }
-
-        function nextMonth() {
-            currentDate.setMonth(currentDate.getMonth() + 1);
-            generateCalendar();
-        }
-
-        // Funções de tarefas
-        function addTask() {
-            document.getElementById('taskModal').style.display = 'block';
-        }
-
-        function closeModal() {
-            document.getElementById('taskModal').style.display = 'none';
-        }
-
-        function addNewTask() {
-            const taskList = document.getElementById('taskList');
-            const newTask = document.createElement('div');
-            newTask.className = 'task-item';
-            newTask.innerHTML = `
-                <input type="checkbox" id="task${Date.now()}" class="task-checkbox">
-                <label for="task${Date.now()}" class="task-label">Nova tarefa</label>
-                <span class="task-category pessoal">Pessoal</span>
-            `;
-            taskList.appendChild(newTask);
-        }
-
-        // Funções de anotações
-        function addNote() {
-            const noteText = document.getElementById('newNote').value.trim();
-            if (!noteText) return;
-            
-            const notesContainer = document.getElementById('notesContainer');
-            const newNote = document.createElement('div');
-            newNote.className = 'note-item';
-            newNote.style.backgroundColor = selectedNoteColor;
-            newNote.innerHTML = `
-                <p>${noteText}</p>
-                <button class="note-delete" onclick="deleteNote(this)">×</button>
-            `;
-            
-            notesContainer.appendChild(newNote);
-            document.getElementById('newNote').value = '';
-        }
-
-        function deleteNote(button) {
-            button.parentElement.remove();
-        }
-
-        function setNoteColor(color) {
-            selectedNoteColor = color;
-            document.querySelectorAll('.color-btn').forEach(btn => {
-                btn.classList.remove('selected');
-            });
-            event.target.classList.add('selected');
-        }
-
-        // Outras funções
-        function viewMonth() {
-            alert('Funcionalidade de visualização completa do mês será implementada');
-        }
-
-        function loadTasks() {
-            // Simular carregamento de tarefas
-            console.log('Tarefas carregadas');
-        }
-
-        // Fechar modal ao clicar fora
-        window.onclick = function(event) {
-            const modal = document.getElementById('taskModal');
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
-        }
-    </script>
+    
+    <div class="card">
+        <h3>Tarefas</h3>
+        <p>Lista de tarefas</p>
+        <a href="#" class="btn btn-primary">Ver Tarefas</a>
+    </div>
+</div>
 {% endblock %}
+

@@ -2,266 +2,43 @@
 
 {% block title %}Perfil - Infinity School{% endblock %}
 
-{% block header %}
-<div class="nav-menu">
-    <a href="/" class="btn btn-secondary">🏠 Dashboard</a>
-    <a href="/perfil" class="btn btn-primary">👤 Perfil</a>
-    <a href="#" class="btn btn-secondary">📅 Calendário</a>
-    <a href="#" class="btn btn-secondary">📝 Anotações</a>
-    <a href="#" class="btn btn-secondary">🔔 Notificações</a>
-</div>
-{% endblock %}
+{% block header_title %}Perfil do Usuário{% endblock %}
 
 {% block content %}
-    <div class="profile-container">
+<div class="profile-container">
+    <div class="profile-card">
         <div class="profile-header">
             <div class="profile-avatar">
-                <img src="https://via.placeholder.com/120/6366f1/ffffff?text=JS" alt="Foto do perfil" id="profileImage">
-                <button class="avatar-edit" onclick="editAvatar()">📷</button>
+                <img src="#" alt="Avatar" class="avatar-img">
             </div>
             <div class="profile-info">
-                <h2 id="userName">João Silva</h2>
-                <p class="profile-role" id="userRole">Professor de Matemática</p>
-                <p class="profile-email" id="userEmail">joao.silva@infinityschool.com.br</p>
-                <button class="btn btn-primary" onclick="editProfile()">✏️ Editar Perfil</button>
+                <h2>Nome do Usuário</h2>
+                <p>email@exemplo.com</p>
             </div>
         </div>
-
+        
         <div class="profile-content">
-            <div class="profile-section">
-                <h3>📋 Informações Pessoais</h3>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <label>Nome Completo:</label>
-                        <span id="fullName">João Silva Santos</span>
-                    </div>
-                    <div class="info-item">
-                        <label>CPF:</label>
-                        <span id="cpf">***.***.***-**</span>
-                    </div>
-                    <div class="info-item">
-                        <label>Data de Nascimento:</label>
-                        <span id="birthDate">15/03/1985</span>
-                    </div>
-                    <div class="info-item">
-                        <label>Telefone:</label>
-                        <span id="phone">(11) 99999-9999</span>
-                    </div>
-                    <div class="info-item">
-                        <label>Endereço:</label>
-                        <span id="address">Rua das Flores, 123 - São Paulo, SP</span>
-                    </div>
-                    <div class="info-item">
-                        <label>Data de Admissão:</label>
-                        <span id="admissionDate">01/02/2020</span>
-                    </div>
+            <h3>Informações Pessoais</h3>
+            <form class="profile-form">
+                <div class="form-group">
+                    <label for="name">Nome:</label>
+                    <input type="text" id="name" name="name" value="Nome do Usuário">
                 </div>
-            </div>
-
-            <div class="profile-section">
-                <h3>💼 Informações Profissionais</h3>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <label>Cargo:</label>
-                        <span id="position">Professor de Matemática</span>
-                    </div>
-                    <div class="info-item">
-                        <label>Departamento:</label>
-                        <span id="department">Ensino Médio</span>
-                    </div>
-                    <div class="info-item">
-                        <label>Matrícula:</label>
-                        <span id="registration">INF2020001</span>
-                    </div>
-                    <div class="info-item">
-                        <label>Carga Horária:</label>
-                        <span id="workload">40h semanais</span>
-                    </div>
-                    <div class="info-item">
-                        <label>Turmas:</label>
-                        <span id="classes">1ºA, 2ºB, 3ºC</span>
-                    </div>
-                    <div class="info-item">
-                        <label>Supervisor:</label>
-                        <span id="supervisor">Maria Coordenadora</span>
-                    </div>
+                
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="email@exemplo.com">
                 </div>
-            </div>
-
-            <div class="profile-section">
-                <h3>📝 Bio Profissional</h3>
-                <div class="bio-container">
-                    <p id="userBio">
-                        Professor de Matemática com mais de 15 anos de experiência no ensino médio. 
-                        Especialista em metodologias ativas e uso de tecnologia na educação. 
-                        Mestre em Educação Matemática pela USP. Apaixonado por ensinar e inspirar 
-                        jovens a descobrirem a beleza dos números e da lógica matemática.
-                    </p>
-                    <button class="btn btn-secondary" onclick="editBio()">✏️ Editar Bio</button>
+                
+                <div class="form-group">
+                    <label for="phone">Telefone:</label>
+                    <input type="tel" id="phone" name="phone" value="">
                 </div>
-            </div>
-
-            <div class="profile-section">
-                <h3>🎯 Estatísticas</h3>
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-number">156</div>
-                        <div class="stat-label">Tarefas Concluídas</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">23</div>
-                        <div class="stat-label">Reuniões Este Mês</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">89%</div>
-                        <div class="stat-label">Taxa de Conclusão</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">4.8</div>
-                        <div class="stat-label">Avaliação Média</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="profile-section">
-                <h3>🔧 Configurações</h3>
-                <div class="settings-list">
-                    <div class="setting-item">
-                        <label>Notificações por Email</label>
-                        <input type="checkbox" id="emailNotifications" checked>
-                    </div>
-                    <div class="setting-item">
-                        <label>Notificações Push</label>
-                        <input type="checkbox" id="pushNotifications" checked>
-                    </div>
-                    <div class="setting-item">
-                        <label>Modo Escuro Automático</label>
-                        <input type="checkbox" id="autoDarkMode">
-                    </div>
-                    <div class="setting-item">
-                        <label>Sincronizar com Google Calendar</label>
-                        <input type="checkbox" id="googleSync" checked>
-                    </div>
-                </div>
-                <button class="btn btn-primary mt-4" onclick="saveSettings()">💾 Salvar Configurações</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal de edição de perfil -->
-    <div id="editProfileModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeEditModal()">&times;</span>
-            <h3>Editar Perfil</h3>
-            <form id="editProfileForm">
-                <input type="text" id="editName" placeholder="Nome completo" required>
-                <input type="email" id="editEmail" placeholder="Email" required>
-                <input type="tel" id="editPhone" placeholder="Telefone">
-                <input type="text" id="editPosition" placeholder="Cargo">
-                <input type="text" id="editDepartment" placeholder="Departamento">
-                <div class="modal-buttons">
-                    <button type="button" class="btn btn-secondary" onclick="closeEditModal()">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-                </div>
+                
+                <button type="submit" class="btn btn-primary">Salvar Alterações</button>
             </form>
         </div>
     </div>
-
-    <!-- Modal de edição de bio -->
-    <div id="editBioModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeBioModal()">&times;</span>
-            <h3>Editar Bio Profissional</h3>
-            <form id="editBioForm">
-                <textarea id="editBioText" placeholder="Conte um pouco sobre sua experiência profissional..." rows="6"></textarea>
-                <div class="modal-buttons">
-                    <button type="button" class="btn btn-secondary" onclick="closeBioModal()">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Salvar Bio</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <script>
-        // Funções de edição
-        function editProfile() {
-            document.getElementById('editName').value = document.getElementById('fullName').textContent;
-            document.getElementById('editEmail').value = document.getElementById('userEmail').textContent;
-            document.getElementById('editPhone').value = document.getElementById('phone').textContent;
-            document.getElementById('editPosition').value = document.getElementById('position').textContent;
-            document.getElementById('editDepartment').value = document.getElementById('department').textContent;
-            document.getElementById('editProfileModal').style.display = 'block';
-        }
-
-        function closeEditModal() {
-            document.getElementById('editProfileModal').style.display = 'none';
-        }
-
-        function editBio() {
-            document.getElementById('editBioText').value = document.getElementById('userBio').textContent.trim();
-            document.getElementById('editBioModal').style.display = 'block';
-        }
-
-        function closeBioModal() {
-            document.getElementById('editBioModal').style.display = 'none';
-        }
-
-        function editAvatar() {
-            alert('Funcionalidade de upload de foto será implementada');
-        }
-
-        function saveSettings() {
-            alert('Configurações salvas com sucesso!');
-        }
-
-        // Submissão dos formulários
-        document.getElementById('editProfileForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Atualizar informações na página
-            document.getElementById('userName').textContent = document.getElementById('editName').value.split(' ')[0] + ' ' + document.getElementById('editName').value.split(' ')[1];
-            document.getElementById('fullName').textContent = document.getElementById('editName').value;
-            document.getElementById('userEmail').textContent = document.getElementById('editEmail').value;
-            document.getElementById('phone').textContent = document.getElementById('editPhone').value;
-            document.getElementById('position').textContent = document.getElementById('editPosition').value;
-            document.getElementById('userRole').textContent = document.getElementById('editPosition').value;
-            document.getElementById('department').textContent = document.getElementById('editDepartment').value;
-            
-            closeEditModal();
-            alert('Perfil atualizado com sucesso!');
-        });
-
-        document.getElementById('editBioForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            document.getElementById('userBio').textContent = document.getElementById('editBioText').value;
-            
-            closeBioModal();
-            alert('Bio atualizada com sucesso!');
-        });
-
-        // Fechar modais ao clicar fora
-        window.onclick = function(event) {
-            const editModal = document.getElementById('editProfileModal');
-            const bioModal = document.getElementById('editBioModal');
-            
-            if (event.target === editModal) {
-                editModal.style.display = 'none';
-            }
-            if (event.target === bioModal) {
-                bioModal.style.display = 'none';
-            }
-        }
-
-        // Animação de entrada
-        document.addEventListener('DOMContentLoaded', function() {
-            const sections = document.querySelectorAll('.profile-section');
-            sections.forEach((section, index) => {
-                setTimeout(() => {
-                    section.classList.add('fade-in');
-                }, index * 200);
-            });
-        });
-    </script>
+</div>
 {% endblock %}
 
