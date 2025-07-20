@@ -1,0 +1,91 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+
+# If your project uses Django's collectstatic
+/static/
+
+# Ignore environment variables file
+.env
+.env.*
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+.pip/
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# pip-tools
+*.txt~
+*.bak
+*.orig
+
+# Mac OS
+.DS_Store
+
+# coverage reports
+htmlcov/
+.coverage
+coverage.xml
+*.cover
+.cache
+nosetests.xml
+*.prof
+
+# pytest
+.pytest_cache/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pyright
+typings/
+
+# Pylint
+pylint-report.txt
+pylint-global.txt
+
+# Build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+*.manifest
+*.spec
+
+# Sentry CLI sourcemaps
+.sentryclirc
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Docker
+*.pid
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
