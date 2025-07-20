@@ -15,7 +15,7 @@ media/
 staticfiles/
 
 # If your project uses Django's collectstatic
-/static/
+# /static/
 
 # Ignore environment variables file
 .env
