@@ -4,64 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Infinity School - Sistema de Produtividade{% endblock %}</title>
+    <title>{% block title %}Infinity School{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Toggle modo escuro -->
-    <button class="theme-toggle" onclick="toggleTheme()" title="Alternar tema">
-        🌙
-    </button>
-
     <header>
-        <h1>Infinity School</h1>
-        <p class="text-muted">Sistema de Produtividade e Organização</p>
+        <h1>{% block header_title %}{% endblock %}</h1>
         {% block header %}{% endblock %}
     </header>
-
     <main>
-        {% block content %}
-        <p>Conteúdo padrão</p>
-        {% endblock %}
+        {% block content %}{% endblock %}
     </main>
-
     <footer>
-        <p>&copy; 2025 Infinity School - Todos os direitos reservados</p>
+        <p>&copy; 2025 Infinity School. Todos os direitos reservados.</p>
     </footer>
-
     <script>
-        // Toggle modo escuro
-        function toggleTheme() {
-            document.body.classList.toggle('dark-mode');
-            const isDark = document.body.classList.contains('dark-mode');
-            localStorage.setItem('darkMode', isDark);
-            
-            // Atualizar ícone
-            const toggle = document.querySelector('.theme-toggle');
-            toggle.textContent = isDark ? '☀️' : '🌙';
-        }
-
-        // Carregar preferência de tema
-        document.addEventListener('DOMContentLoaded', function() {
-            const isDark = localStorage.getItem('darkMode') === 'true';
-            if (isDark) {
-                document.body.classList.add('dark-mode');
-                document.querySelector('.theme-toggle').textContent = '☀️';
-            }
-        });
-
-        // Animações de entrada
-        document.addEventListener('DOMContentLoaded', function() {
-            const elements = document.querySelectorAll('.card, .btn');
-            elements.forEach((el, index) => {
-                setTimeout(() => {
-                    el.classList.add('fade-in');
-                }, index * 100);
-            });
+        // Lógica para alternar tema (se necessário)
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggle = document.createElement('button');
+            themeToggle.textContent = 'Toggle Theme';
+            themeToggle.style.position = 'fixed';
+            themeToggle.style.top = '10px';
+            themeToggle.style.right = '10px';
+            themeToggle.style.zIndex = '9999';
+            themeToggle.onclick = () => {
+                document.body.classList.toggle('dark-mode');
+            };
+            document.body.appendChild(themeToggle);
         });
     </script>
 </body>
 </html>
+
