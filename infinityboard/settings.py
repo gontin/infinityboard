@@ -40,7 +40,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'projeto.urls'
+ROOT_URLCONF = 'infinityboard.urls'
 
 TEMPLATES = [
     {
@@ -57,7 +57,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'projeto.wsgi.application'
+WSGI_APPLICATION = 'infinityboard.wsgi.application'
 
 
 # Database
