@@ -5,7 +5,7 @@ import cloudinary.uploader
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+# ATENÇÃO TIRA DPS WAWAWAWAWA
 cloudinary.config( 
   cloud_name = 'dlockrowv', 
   api_key = '657389947585314', 
