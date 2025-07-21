@@ -330,7 +330,7 @@ button[onclick*="dark-mode"]:hover {
 }
 
 input[type='file'] {
-  display: none
+    display: none
 }
 
 .upload-img-label {
