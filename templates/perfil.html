@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Perfil - Infinity School{% endblock %}
 
@@ -9,36 +10,75 @@
     <div class="profile-card">
         <div class="profile-header">
             <div class="profile-avatar">
-                <img src="#" alt="Avatar" class="avatar-img">
+                {% if user.perfil.foto %}
+                    <img src="{{ user.perfil.foto }}" alt="Avatar" class="avatar-img">
+                {% else %}
+                    <p>foto de perfil hipotética</p>
+                {% endif %}
             </div>
             <div class="profile-info">
-                <h2>Nome do Usuário</h2>
-                <p>email@exemplo.com</p>
+                <h2>{{ user.perfil.nome|default:user.username }}</h2>
+                <p>{{ user.email }}</p>
             </div>
         </div>
         
         <div class="profile-content">
             <h3>Informações Pessoais</h3>
-            <form class="profile-form">
+            <form method="post" enctype="multipart/form-data" class="profile-form">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="foto-upload" class="btn btn-primary upload-img-label">
+                        Mudar Foto de Perfil
+                    </label>
+                    <input type="file" id="foto-upload" name="foto" accept="image/*" required>
+                    <img id="preview-img" src="#" alt="Prévia da imagem" style="display:none;" />
+                </div>
+
                 <div class="form-group">
                     <label for="name">Nome:</label>
-                    <input type="text" id="name" name="name" value="Nome do Usuário">
+                    <input type="text" id="name" name="nome" value="{{ user.perfil.nome }}" required>
                 </div>
                 
                 <div class="form-group">
                     <label for="email">Email:</label>
-                    <input type="email" id="email" name="email" value="email@exemplo.com">
+                    <input type="email" id="email" name="email" value="{{ user.email }}" required>
                 </div>
-                
+
                 <div class="form-group">
-                    <label for="phone">Telefone:</label>
-                    <input type="tel" id="phone" name="phone" value="">
+                    <label for="funcao">Função:</label>
+                    <input type="text" id="funcao" name="funcao" value="{{ user.perfil.funcao }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="bio">Bio:</label>
+                    <textarea id="bio" name="bio" rows="4">{{ user.perfil.bio }}</textarea>
                 </div>
                 
                 <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                <a href="{% url 'inicio' %}" class="btn btn-secondary" style="margin-left: 10px;">Voltar ao Início</a>
             </form>
         </div>
     </div>
 </div>
 {% endblock %}
+{% block scripts %}
+<script>
+  const inputFile = document.getElementById('foto-upload');
+  const previewImg = document.getElementById('preview-img');
 
+  inputFile.addEventListener('change', function() {
+    const file = this.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        previewImg.src = e.target.result;
+        previewImg.style.display = 'block';
+      };
+      reader.readAsDataURL(file);
+    } else {
+      previewImg.style.display = 'none';
+    }
+  });
+</script>
+{% endblock %}

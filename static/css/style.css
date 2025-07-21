@@ -329,3 +329,88 @@ button[onclick*="dark-mode"]:hover {
     opacity: 0.9;
 }
 
+input[type='file'] {
+  display: none
+}
+
+.upload-img-label {
+    background-color: var(--accent-color);
+    color: white !important;
+    text-align: center;
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    margin: 4px 2px;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: var(--shadow);
+}
+
+#preview-img {
+    display: block;
+    margin-top: 1rem;
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--accent-color);
+    box-shadow: var(--shadow);
+}
+.nav-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.left-menu a {
+  margin-right: 1rem;
+}
+
+.right-menu {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.profile-img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+}
+
+.username {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+textarea#bio {
+    width: 100%;           /* mesma largura dos inputs */
+    height: 120px;         /* altura maior para a bio */
+    resize: none;          /* desativa o redimensionamento */
+    padding: 0.75rem;      /* padding igual aos inputs */
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-family: 'Arial', sans-serif;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+textarea#bio:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}

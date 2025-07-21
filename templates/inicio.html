@@ -6,10 +6,23 @@
 
 {% block header %}
 <nav class="nav-menu">
-    <a href="#" class="btn btn-primary">Dashboard</a>
-    <a href="#" class="btn btn-secondary">Perfil</a>
-    <a href="#" class="btn btn-secondary">Calendário</a>
-    <a href="#" class="btn btn-secondary">Anotações</a>
+    <div class="left-menu">
+        <a href="#" class="btn btn-primary">Dashboard</a>
+        <a href="{% url 'perfil' %}" class="btn btn-secondary">Perfil</a>
+        <a href="#" class="btn btn-secondary">Calendário</a>
+        <a href="#" class="btn btn-secondary">Anotações</a>
+    </div>
+
+    <div class="right-menu">
+        <div class="profile-container">
+            <img src="{{ user.perfil.foto }}" alt="Foto de Perfil" class="profile-img">
+            <span class="username">{{ user.perfil }}</span>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Logout</button>
+            </form>
+        </div>
+    </div>
 </nav>
 {% endblock %}
 
