@@ -4,12 +4,14 @@
 
 {% block header_title %}Dashboard{% endblock %}
 
+{% block head %}
+{% endblock %}
+
 {% block header %}
 <nav class="nav-menu">
     <div class="left-menu">
         <a href="#" class="btn btn-primary">Dashboard</a>
         <a href="{% url 'perfil' %}" class="btn btn-secondary">Perfil</a>
-        <a href="#" class="btn btn-secondary">Calendário</a>
         <a href="#" class="btn btn-secondary">Anotações</a>
     </div>
 
@@ -40,15 +42,15 @@
     </div>
     
     <div class="card">
-        <h3>Sistemas</h3>
-        <p>Portal do aluno</p>
-        <a href="#" class="btn btn-primary">Acessar</a>
+        <h3>Portal do aluno</h3>
+        <p>Site Portal da Infinity</p>
+        <a href="https://infinityschool.eadplataforma.app" class="btn btn-primary">Acessar</a>
     </div>
-    
+
     <div class="card">
-        <h3>Calendário</h3>
-        <p>Organize suas tarefas</p>
-        <a href="#" class="btn btn-primary">Ver Calendário</a>
+        <h3>Infinity App</h3>
+        <p>Aplicativo da Infinity</p>
+        <a href="https://www.infinityschool.app" class="btn btn-primary">App</a>
     </div>
     
     <div class="card">
@@ -56,6 +58,125 @@
         <p>Lista de tarefas</p>
         <a href="#" class="btn btn-primary">Ver Tarefas</a>
     </div>
+    
+    <div class="card calendar-card">
+        <h3>Calendário</h3>
+        <div id="calendar"></div>
+    </div>
+</div>
+<div id="formulario-tarefa" style="display: none; margin-top: 20px;">
+    <h3>Nova Tarefa</h3>
+    <form id="form-tarefa">
+        <label for="titulo">Título:</label><br>
+        <input type="text" id="titulo" name="titulo" required><br><br>
+
+        <label for="tipo">Tipo:</label><br>
+        <input type="text" id="tipo" name="tipo"><br><br>
+
+        <label for="data-inicio">Início:</label><br>
+        <input type="datetime-local" id="data-inicio" name="inicio" required><br><br>
+
+        <label for="data-fim">Fim:</label><br>
+        <input type="datetime-local" id="data-fim" name="fim" required><br><br>
+
+        <button type="submit">Salvar Tarefa</button>
+        <button type="button" onclick="cancelarFormulario()">Cancelar</button>
+    </form>
 </div>
 {% endblock %}
 
+{% block scripts %}
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet" />
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/locales-all.global.min.js"></script>
+
+<script>
+    // calendario puxando do google calendar
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+
+        // Referência global para o calendário
+        window.calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'pt-br',
+            selectable: true,
+            headerToolbar: {
+                center: 'title',
+            },
+            footerToolbar: {
+                left: 'prev,next today',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            events: "{% url 'eventos_google_calendar' %}",
+
+            dateClick: function(info) {
+                document.getElementById('formulario-tarefa').style.display = 'block';
+
+                const dataHora = new Date(info.dateStr);
+                const dataFormatada = dataHora.toISOString().slice(0, 16); // yyyy-MM-ddTHH:mm
+
+                document.getElementById('data-inicio').value = dataFormatada;
+                document.getElementById('data-fim').value = dataFormatada;
+            },
+
+            loading: function(isLoading) {
+                if (isLoading) {
+                    // mostrar spinner, se quiser
+                }
+            }
+        });
+
+        calendar.render();
+    });
+    //lidar com envio do formulario
+    document.getElementById('form-tarefa').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const titulo = document.getElementById('titulo').value;
+        const tipo = document.getElementById('tipo').value;
+        const inicio = document.getElementById('data-inicio').value;
+        const fim = document.getElementById('data-fim').value;
+        //criando a tarefa
+        fetch("{% url 'criar_tarefa' %}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({
+                titulo: titulo,
+                tipo: tipo,
+                inicio: inicio,
+                fim: fim
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.calendar.addEvent({
+                    title: `${titulo} (${tipo})`,
+                    start: inicio,
+                    end: fim,
+                    allDay: false
+                });
+                document.getElementById('formulario-tarefa').style.display = 'none';
+                document.getElementById('form-tarefa').reset();
+            } else {
+                alert("Erro ao salvar tarefa.");
+            }
+        })
+        .catch(error => {
+            console.error("Erro:", error);
+        });
+
+        document.getElementById('formulario-tarefa').style.display = 'none';
+        document.getElementById('form-tarefa').reset();
+    });
+
+    function cancelarFormulario() {
+        document.getElementById('formulario-tarefa').style.display = 'none';
+        document.getElementById('form-tarefa').reset();
+    }
+</script>
+{% endblock %}

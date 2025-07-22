@@ -3,9 +3,18 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
 from cloudinary.uploader import upload
 from cloudinary.exceptions import Error as CloudinaryError
-from .models import Usuario
+from .models import Usuario, Tarefa
+import os
+import datetime
+import json
+from django.http import JsonResponse
+from google.oauth2.credentials import Credentials
+from googleapiclient.discovery import build
+from .utils.evento_cldr import criar_evento_google_calendar, deletar_evento_google_calendar, criar_evento_google
+SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
 @login_required
 def dashboard(request):
@@ -105,6 +114,75 @@ def registro_view(request):
 
     return render(request, "registro.html")
 
+def calendario(request):
+    return render(request, 'calendario.html')
+
+def eventos_google_calendar(request):
+    creds = Credentials.from_authorized_user_file(
+        os.path.join('apps', 'usuarios', 'utils', 'token.json'), SCOPES)
+
+    service = build('calendar', 'v3', credentials=creds)
+
+    now = datetime.datetime.utcnow().isoformat() + 'Z'
+
+    events_result = service.events().list(
+        calendarId='primary',
+        timeMin=now,
+        maxResults=50,
+        singleEvents=True,
+        orderBy='startTime'
+    ).execute()
+
+    events = events_result.get('items', [])
+
+    dados = []
+    for event in events:
+        start = event['start'].get('dateTime', event['start'].get('date'))
+        dados.append({
+            'title': event.get('summary', '(Sem título)'),
+            'start': start,
+        })
+
+    return JsonResponse(dados, safe=False)
+
+@csrf_exempt
+@login_required
+def criar_tarefa(request):
+    if request.method == 'POST':
+        dados = json.loads(request.body)
+        titulo = dados.get('titulo')
+        tipo = dados.get('tipo')
+        inicio = dados.get('inicio')
+        fim = dados.get('fim')
+
+        try:
+            evento_google = criar_evento_google(titulo, tipo, inicio, fim, request.user)
+        except Exception as e:
+            print("Erro ao criar evento no Google:", e)
+            return JsonResponse({'success': False})
+
+        Tarefa.objects.create(
+            usuario=request.user,
+            titulo=titulo,
+            tipo=tipo,
+            data_inicio=inicio,
+            data_fim=fim,
+            google_event_id=evento_google['id']
+        )
+
+        return JsonResponse({'success': True})
+    
+    return JsonResponse({'success': False})
+@csrf_exempt
+def excluir_tarefa(request, id):
+    if request.method == 'DELETE':
+        try:
+            tarefa = Tarefa.objects.get(id=id, usuario=request.user)
+            deletar_evento_google_calendar(tarefa.google_event_id)
+            tarefa.delete()
+            return JsonResponse({'status': 'excluido'})
+        except Tarefa.DoesNotExist:
+            return JsonResponse({'erro': 'Tarefa não encontrada'}, status=404)
 def logout_view(request):
     """Logout do usuário"""
     logout(request)

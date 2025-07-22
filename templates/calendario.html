@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Calendário</title>
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="calendar"></div>
+
+    <!-- Scripts do FullCalendar -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/locales-all.global.min.js"></script>
+
+    <!-- Seu script de inicialização -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            locale: 'pt-br',
+            headerToolbar: {
+                center: 'title',  // Título sozinho no topo
+                left: '',         // Nada na esquerda
+                right: ''         // Nada na direita
+            },
+            footerToolbar: {
+                left: 'prev,next today',
+                right: 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            events: "{% url 'eventos_google_calendar' %}",
+            loading: function(isLoading) {
+                if (isLoading) {
+                    // spinner opcional
+                }
+            }
+        });
+
+        calendar.render();
+    });
+    </script>
+</body>
+</html>

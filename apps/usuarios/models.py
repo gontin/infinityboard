@@ -11,3 +11,14 @@ class Usuario(models.Model):
 
     def __str__(self):
         return self.nome or self.usuario.username
+    
+class Tarefa(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    titulo = models.CharField(max_length=200)
+    tipo = models.CharField(max_length=100)
+    data_inicio = models.DateTimeField()
+    data_fim = models.DateTimeField()
+    google_event_id = models.CharField(max_length=255, blank=True)
+
+    def __str__(self):
+        return f"{self.titulo} ({self.tipo})"

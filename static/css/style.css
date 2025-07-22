@@ -414,3 +414,28 @@ textarea#bio:focus {
     outline: none;
     border-color: var(--accent-color);
 }
+
+
+#calendar {
+    max-width: 100%;
+    min-height: 600px;
+    margin: 20px auto;
+}
+
+.card.calendar-card {
+    width: 100%;
+    grid-column: span 2;
+}
+.fc .fc-button-primary {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    text-align: center;
+    background-color: var(--accent-color);
+    color: white;
+}
