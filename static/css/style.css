@@ -14,6 +14,9 @@
     --accent-color: #ff6b6b; /* Vermelho pastel */
     --border-color: #e0e0e0;
     --shadow: 0 2px 4px rgba(0,0,0,0.1);
+    --shadow-hover: 0 4px 8px rgba(0,0,0,0.15);
+    --border-radius: 0.5rem;
+    --transition: all 0.3s ease;
 }
 
 /* Variáveis CSS para tema escuro */
@@ -25,6 +28,7 @@ body.dark-mode {
     --accent-color: #c64132;
     --border-color: #404040;
     --shadow: 0 2px 4px rgba(0,0,0,0.3);
+    --shadow-hover: 0 4px 8px rgba(0,0,0,0.4);
 }
 
 /* Estilos base */
@@ -33,7 +37,7 @@ body {
     background-color: var(--bg-primary);
     color: var(--text-primary);
     line-height: 1.6;
-    transition: all 0.3s ease;
+    transition: var(--transition);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -84,12 +88,14 @@ footer {
     display: inline-block;
     padding: 0.75rem 1.5rem;
     text-decoration: none;
-    border-radius: 0.5rem;
+    border-radius: var(--border-radius);
     border: none;
     cursor: pointer;
     font-size: 1rem;
-    transition: all 0.3s ease;
+    transition: var(--transition);
     text-align: center;
+    font-weight: 500;
+    box-shadow: var(--shadow);
 }
 
 .btn-primary {
@@ -100,6 +106,7 @@ footer {
 .btn-primary:hover {
     opacity: 0.9;
     transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
 }
 
 .btn-secondary {
@@ -111,6 +118,7 @@ footer {
 .btn-secondary:hover {
     background-color: var(--bg-primary);
     transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
 }
 
 /* Cards */
@@ -120,11 +128,12 @@ footer {
     border-radius: 0.75rem;
     padding: 1.5rem;
     box-shadow: var(--shadow);
-    transition: transform 0.3s ease;
+    transition: var(--transition);
 }
 
 .card:hover {
     transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
 }
 
 .card h3 {
@@ -183,30 +192,72 @@ footer {
     margin-bottom: 1.5rem;
 }
 
+/* Form Group - Estilização melhorada */
 .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
     color: var(--text-primary);
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 0.95rem;
 }
 
-.form-group input {
+/* Inputs gerais - Estilização melhorada */
+.form-group input,
+.form-group select,
+.form-group textarea {
     width: 100%;
-    padding: 0.75rem;
-    border: 1px solid var(--border-color);
-    border-radius: 0.5rem;
+    padding: 0.875rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
     background-color: var(--bg-primary);
     color: var(--text-primary);
     font-size: 1rem;
+    font-family: inherit;
+    transition: var(--transition);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-.form-group input:focus {
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
     outline: none;
     border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+    transform: translateY(-1px);
+}
+
+/* Select específico - Melhor aparência */
+.form-group select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 0.75rem center;
+    background-repeat: no-repeat;
+    background-size: 1.5em 1.5em;
+    padding-right: 2.5rem;
+    appearance: none;
+}
+
+/* Datetime-local específico */
+.form-group input[type="datetime-local"] {
+    position: relative;
+    cursor: pointer;
+}
+
+.form-group input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
 }
 
 .login-form .btn {
@@ -319,7 +370,7 @@ button[onclick*="dark-mode"] {
     color: white;
     border: none;
     padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
+    border-radius: var(--border-radius);
     cursor: pointer;
     z-index: 1000;
     font-size: 0.9rem;
@@ -342,9 +393,9 @@ input[type='file'] {
     font-size: 1rem;
     margin: 4px 2px;
     border: none;
-    border-radius: 0.5rem;
+    border-radius: var(--border-radius);
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: var(--transition);
     text-decoration: none;
     font-weight: 600;
     box-shadow: var(--shadow);
@@ -360,6 +411,7 @@ input[type='file'] {
     border: 2px solid var(--accent-color);
     box-shadow: var(--shadow);
 }
+
 .nav-menu {
   display: flex;
   justify-content: space-between;
@@ -395,26 +447,29 @@ input[type='file'] {
   font-weight: 500;
   color: var(--text-primary);
 }
+
 textarea#bio {
-    width: 100%;           /* mesma largura dos inputs */
-    height: 120px;         /* altura maior para a bio */
-    resize: none;          /* desativa o redimensionamento */
-    padding: 0.75rem;      /* padding igual aos inputs */
-    border: 1px solid var(--border-color);
-    border-radius: 0.5rem;
+    width: 100%;
+    height: 120px;
+    resize: none;
+    padding: 0.875rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius);
     background-color: var(--bg-primary);
     color: var(--text-primary);
     font-size: 1rem;
     font-family: 'Arial', sans-serif;
     box-sizing: border-box;
-    transition: border-color 0.3s ease;
+    transition: var(--transition);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 textarea#bio:focus {
     outline: none;
     border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+    transform: translateY(-1px);
 }
-
 
 #calendar {
     max-width: 100%;
@@ -426,16 +481,202 @@ textarea#bio:focus {
     width: 100%;
     grid-column: span 2;
 }
+
 .fc .fc-button-primary {
     display: inline-block;
     padding: 0.75rem 1.5rem;
     text-decoration: none;
-    border-radius: 0.5rem;
+    border-radius: var(--border-radius);
     border: none;
     cursor: pointer;
     font-size: 1rem;
-    transition: all 0.3s ease;
+    transition: var(--transition);
     text-align: center;
     background-color: var(--accent-color);
     color: white;
 }
+
+/* MODAL E FORMULÁRIO DE TAREFA - ESTILIZAÇÃO MELHORADA */
+#modal-tarefa {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+#formulario-tarefa {
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    min-width: 400px;
+    max-width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from { 
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#formulario-tarefa h3 {
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+/* Botões do formulário */
+#formulario-tarefa .btn {
+    margin-right: 0.75rem;
+    margin-top: 1rem;
+    min-width: 120px;
+    font-weight: 600;
+}
+
+#formulario-tarefa .btn:last-child {
+    margin-right: 0;
+}
+
+/* Botão cancelar com estilo diferenciado */
+#btn-cancelar {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border: 2px solid var(--border-color) !important;
+}
+
+#btn-cancelar:hover {
+    background-color: #e9ecef !important;
+    border-color: var(--accent-color) !important;
+}
+
+/* Container dos botões */
+.form-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+/* Responsividade do modal */
+@media (max-width: 768px) {
+    #formulario-tarefa {
+        min-width: 320px;
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+    
+    .form-buttons {
+        flex-direction: column;
+    }
+    
+    #formulario-tarefa .btn {
+        margin-right: 0;
+        width: 100%;
+    }
+}
+
+/* LISTA DE TAREFAS COM INDICADORES DE COR */
+#lista-tarefas {
+    list-style: none;
+    padding: 0;
+}
+
+/* Item individual da tarefa */
+.tarefa-item {
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: var(--transition);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.tarefa-item:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* Indicador de cor circular */
+.color-indicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Texto da tarefa */
+.tarefa-texto {
+    flex: 1;
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+/* Botão excluir */
+.btn-excluir {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: var(--transition);
+    font-weight: 500;
+    flex-shrink: 0;
+}
+
+.btn-excluir:hover {
+    background-color: #c82333;
+    transform: translateY(-1px);
+}
+
+/* Responsividade para lista de tarefas */
+@media (max-width: 768px) {
+    .tarefa-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+    
+    .color-indicator {
+        align-self: flex-start;
+    }
+    
+    .btn-excluir {
+        align-self: stretch;
+        text-align: center;
+    }
+}
+

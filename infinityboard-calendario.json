@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "infinityboard-calendario",
+  "private_key_id": "e8af2d0e750af7384b336ea5508396f1fdb00276",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDHmPi8+whmLnKD\nD4SCvAnn3+/k5xajWNT0yFQTo+kWkOn+CerLG/o8zSsVqgDBhosILSqGS4XW3Qtw\nKXlUn7gyEFgiGPfoX2vM3OjVTkodY29vDHyvjoNYHo2OmQtBZINmPwyOzmDk7IG/\nZzABddFx8yYBh4zXBgFnU0QhxG5hyPquQ0sLugJP7TSqJXAkyoqj9mXhSpKV8zSp\nfrDi4w6zV214o9FinmIzUYzKV0B1FIrFErFjvtgdLjw0S05IfcYGZYOiW3/mrSxi\nlRKXo47PlMCWwZ3eFmX7reMutEUtg+HNbRvc4rkoq1Ht4HNhl9UnwMfKpvJ6JKxi\npXRTJ7Y3AgMBAAECggEAEWI0I7gUsrA6k/SUMhNbeiue8pzidAaRbDejBEo4dkPX\nxU2AJVbB9BgFt8TPJ7Zmlyc2jBdkHY2x6H+24VUUefPCIUdzFp9yPZeYhbS5sBaQ\nHCgGbKnTrFHjj/b/VnTWcYoYjLrSZeMSp89pDG+CTCjaTLQiuDrTK3htN32qrsRm\nnPQRuivZWTqsfcIQkO6t0db0Ar8KbiZZel9xxcL3Q6rVVaJLNhQGmCGWjKLTXDjS\nLRHTW2Haf/VUGSHmYTu+fdnQjSAT7+mDx3rTLZBcpXe5uG02W6z273tRG6KVHN5b\n5baLsHfFcy/qdRpxRMoAfp8Tq4R8oamEvsDtJ4lfrQKBgQD3FBQyEt0j1CxxtwcU\nxhTu+mCMMnFWZqTzhheeseX7g4rg8IZWQeeWPNII8xP2M9AuDvfmVyngJuVsnOmj\n8CBTgfZ9iPuawQXQ/XE96Fagste6yf4ZxZNFkyNfRQWPyb0HavFzGBwQmODwFIZT\nA+Ovbh5Nq6TfxLHDcJjHYfyOnQKBgQDOzf5E/0fMslXQEGdOkLMMOMYUNiz0swMS\nUbbiPJ3bGjyGpnc/vmnJtLGsHyRA6pmZEBMxu5wNhW7VkNGFueMfP3J3feEMFdqA\nJoJDpIytBtO9EVX+LymKOI31ENBGjvvxvb3gzSwdQefswhJTh70xyNA76qFl96Jb\nzaNXKM314wKBgQCCgSCJsl0L563yAnLDDj1QXP9SDfK/aEgIOPOQ5vZK+xgH6AOM\n3BKu0EFAaORKTuPO8CkQiUmdE+5qiBcAeH0anrLLa+c5vmqMENIXmPjouI4qIzcL\n9cfsH+O3FoXxhOVLXblayYlJWva02KJ6hrtklg17iQX1C7e5O2f3KFJ2IQKBgQCD\niRn1ILm2RKe4EvbiTb7UQzgZmuu1KDcH69l6xDtTJLjim/a1IJOAq+FmLNiOQak4\nZbUPqNh08S2xwM7DU5xWP7C6t+HwIeY8JEIua/beBr2eP+yGI9E0DQydlvgiKMeu\n1pRy64znfwfY2wd1AZ0gkS2BLpdBl+Q4p+8AfP+jKQKBgCiST/CprJoNo8sYM8qg\neq8TUDmdDAelXACuT3Tgwg+iAVpoAhchE+tDOlV3hqMgt/sMwkZKFSKBYUVo3XXu\nfcmz91QY3C7X++5McQrBEAhd0WQniWOKtMBvkTvdqCevMsHCe46ic9osPZ0wpXd2\n+hqj+0CLrCF1YCPfz5yHzxEM\n-----END PRIVATE KEY-----\n",
+  "client_email": "infinityboard@infinityboard-calendario.iam.gserviceaccount.com",
+  "client_id": "100121545790708205170",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/infinityboard%40infinityboard-calendario.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

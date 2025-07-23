@@ -1,9 +1,12 @@
 from pathlib import Path
-import os
 import cloudinary
 import cloudinary.uploader
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+CAMINHO_CREDENCIAIS = BASE_DIR / 'infinityboard-calendario.json'
+CALENDAR_ID = 'yuumizinham@gmail.com'
 
 # ATENÇÃO TIRA DPS WAWAWAWAWA
 cloudinary.config( 
