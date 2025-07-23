@@ -1,0 +1,25 @@
+/* Variáveis CSS para tema claro */
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --accent-color: #ff6b6b; /* Vermelho pastel */
+    --border-color: #e0e0e0;
+    --shadow: 0 2px 4px rgba(0,0,0,0.1);
+    --shadow-hover: 0 4px 8px rgba(0,0,0,0.15);
+    --border-radius: 0.5rem;
+    --transition: all 0.3s ease;
+}
+
+/* Variáveis CSS para tema escuro */
+body.dark-mode {
+    --bg-primary: #1c1919;
+    --bg-secondary: #292929;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --accent-color: #c64132;
+    --border-color: #404040;
+    --shadow: 0 2px 4px rgba(0,0,0,0.3);
+    --shadow-hover: 0 4px 8px rgba(0,0,0,0.4);
+}
