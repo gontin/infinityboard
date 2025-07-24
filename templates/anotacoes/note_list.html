@@ -6,16 +6,16 @@
 <!-- Botão flutuante para adicionar nota -->
 <a href="{% url 'note_create' %}" class="add-note-btn" title="Nova Nota">+</a>
 
-<div class="notes-bar">
+<div class="notas-container">
     {% for note in notes %}
-        <div class="note-card" onclick="openNoteModal({{ note.id }})">
+        <div class="nota-card" onclick="openNoteModal({{ note.id }})">
             <div style="flex:1">
                 <div style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; max-width:100%;">
                     {{ note.content|truncatechars:85 }}
                 </div>
             </div>
-            <div class="note-title">{{ note.title|default:"Sem título" }}</div>
-            <div class="note-date">{{ note.created_at|date:"d/m/Y" }}</div>
+            <div class="nota-title">{{ note.title|default:"Sem título" }}</div>
+            <div class="nota-date">{{ note.created_at|date:"d/m/Y" }}</div>
         </div>
     {% empty %}
         <div style="color:#888; font-size:1.1em;">Nenhuma nota criada ainda.</div>
