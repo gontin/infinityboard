@@ -1,32 +1,5 @@
-{% extends 'base.html' %}
+{% extends 'anotacoes/base_notas.html' %}
 {% load static %}
-
-{% block title %}Anotações - Infinity School{% endblock %}
-
-{% block header_title %}Anotações{% endblock %}
-
-{% block header %}
-<nav class="nav-menu">
-    <div class="left-menu">
-        <a href="{% url 'inicio' %}" class="btn btn-secondary">Dashboard</a>
-        <a href="{% url 'perfil' %}" class="btn btn-secondary">Perfil</a>
-        <a href="{% url 'note_list' %}" class="btn btn-primary">Anotações</a>
-    </div>
-
-    <div class="right-menu">
-        <div class="profile-container">
-            <img src="{{ user.perfil.foto }}" alt="Foto de Perfil" class="profile-img">
-            <span class="username">{{ user.perfil }}</span>
-            <form method="post" action="{% url 'logout' %}">
-                {% csrf_token %}
-                <button type="submit" class="btn btn-primary">Logout</button>
-            </form>
-        </div>
-    </div>
-</nav>
-{% endblock %}
-
-<link rel="stylesheet" href="{% static "css/note_list.css" %}">
 
 {% block content %}
 
@@ -49,15 +22,6 @@
     {% endfor %}
 </div>
 
-<!-- MODAL: conteúdo da nota -->
-<div class="modal-bg" id="note-modal-bg">
-    <div class="note-modal" id="note-modal-content">
-        <span class="close-modal" onclick="closeNoteModal()">&times;</span>
-        <div class="note-modal-title" id="modal-title"></div>
-        <div class="note-modal-content" id="modal-content"></div>
-    </div>
-</div>
-
 {% endblock content %}
 
 <script>
@@ -70,7 +34,31 @@
 			created: "{{ note.created_at|date:'d/m/Y' }}"
 		},
 	{% endfor %}
-];
-</script>
+	];
+	
+	// Passe as notas para JS (seguro porque não expõe dados sensíveis)
 
-<script src="{% static 'scripts/note_list.js' %}"></script>
+	function openNoteModal(noteId) {
+		const modalBg = document.getElementById("note-modal-bg");
+		const modalTitle = document.getElementById("modal-title");
+		const modalContent = document.getElementById("modal-content");
+
+		const note = NOTES.find(n => n.id === noteId);
+		if (note) {
+			modalTitle.textContent = note.title || "Sem título";
+			modalContent.innerHTML = note.content;
+			modalBg.classList.add('active');
+		}
+	}
+	function closeNoteModal() {
+		document.getElementById("note-modal-bg").classList.remove('active');
+	}
+	// Fecha modal ao clicar fora da caixa
+	document.getElementById("note-modal-bg").onclick = function(e) {
+		if (e.target === this) closeNoteModal();
+	}
+	// (Opcional: fechar com ESC)
+	window.addEventListener("keydown", function(e){
+		if (e.key === "Escape") closeNoteModal();
+	});
+</script>
