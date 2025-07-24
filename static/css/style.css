@@ -703,19 +703,187 @@ textarea#bio:focus {
     transform: translateY(-1px);
 }
 
-/* RESPONSIVIDADE MOBILE */
+.modal-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    display: none;
+    z-index: 9999;
+}
+
+.modal-content {
+    background: var(--bg-primary);
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* ===== RESPONSIVIDADE MOBILE CORRIGIDA ===== */
 @media (max-width: 768px) {
     main {
         padding: 1rem;
     }
     
+    /* Header normal (não fixo) no mobile */
     header {
-        padding: 1rem;
+        padding: 0.75rem 1rem;
+        position: static; /* Remove o sticky */
+        z-index: auto; /* Remove z-index alto */
+        backdrop-filter: none; /* Remove blur */
+        background-color: var(--bg-secondary); /* Background sólido normal */
     }
     
+    /* Navegação principal - layout otimizado para mobile */
     .nav-menu {
         flex-direction: column;
+        gap: 1rem;
+        padding: 0.75rem;
+        align-items: stretch;
+    }
+    
+    /* Menu esquerdo - botões empilhados horizontalmente */
+    .left-menu {
+        display: flex;
+        flex-wrap: wrap;
         gap: 0.5rem;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .left-menu a {
+        margin-right: 0;
+        flex: 1;
+        min-width: 100px;
+        text-align: center;
+        
+        /* Tamanho mínimo para touch targets */
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        /* Melhor espaçamento interno */
+        padding: 0.875rem 1rem;
+        
+        /* Fonte ligeiramente maior para melhor legibilidade */
+        font-size: 0.95rem;
+        font-weight: 600;
+        
+        /* Bordas mais arredondadas para visual moderno */
+        border-radius: 8px;
+        
+        /* Transição suave */
+        transition: all 0.2s ease;
+    }
+    
+    /* Estados hover/active otimizados para touch */
+    .left-menu a:hover,
+    .left-menu a:active {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Botão ativo com destaque visual */
+    .left-menu a.btn-primary {
+        background-color: var(--accent-color);
+        color: white;
+        box-shadow: 0 2px 8px rgba(255, 107, 107, 0.3);
+    }
+    
+    .left-menu a.btn-secondary {
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        border: 2px solid var(--border-color);
+    }
+    
+    .left-menu a.btn-secondary:hover {
+        border-color: var(--accent-color);
+        background-color: var(--bg-secondary);
+    }
+    
+    /* Menu direito - perfil e logout */
+    .right-menu {
+        width: 100%;
+        justify-content: center;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+    }
+    
+    /* Container do perfil otimizado para mobile */
+    .profile-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        width: 100%;
+        padding: 0.75rem;
+        background-color: var(--bg-primary);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        flex-wrap: wrap;
+    }
+    
+    /* Imagem de perfil com tamanho otimizado */
+    .profile-img {
+        width: 36px;
+        height: 36px;
+        border: 2px solid var(--accent-color);
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Nome do usuário com melhor tipografia */
+    .username {
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: var(--text-primary);
+        flex: 1;
+        text-align: center;
+        min-width: 120px;
+    }
+    
+    /* Botão de logout otimizado para mobile */
+    .profile-container form {
+        margin: 0;
+    }
+    
+    .profile-container button[type="submit"] {
+        min-height: 40px;
+        padding: 0.75rem 1.25rem;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border-radius: 8px;
+        
+        /* Cor diferenciada para logout */
+        background-color: #dc3545;
+        border-color: #dc3545;
+        color: white;
+        
+        /* Transição suave */
+        transition: all 0.2s ease;
+        
+        /* Sombra sutil */
+        box-shadow: 0 2px 6px rgba(220, 53, 69, 0.2);
+    }
+    
+    .profile-container button[type="submit"]:hover,
+    .profile-container button[type="submit"]:active {
+        background-color: #c82333;
+        border-color: #c82333;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
     }
     
     /* Layout mobile - calendário e tarefas empilhados */
@@ -910,6 +1078,115 @@ textarea#bio:focus {
         margin-right: 0;
         margin-bottom: 1rem;
     }
+    
+    /* Melhorias para telas muito pequenas (< 480px) */
+    @media (max-width: 480px) {
+        .left-menu {
+            flex-direction: column;
+        }
+        
+        .left-menu a {
+            flex: none;
+            width: 100%;
+            min-height: 48px;
+            font-size: 1rem;
+            padding: 1rem;
+        }
+        
+        .profile-container {
+            flex-direction: column;
+            text-align: center;
+            gap: 1rem;
+            padding: 1rem;
+        }
+        
+        .username {
+            order: -1;
+            margin-bottom: 0.5rem;
+        }
+        
+        .profile-container button[type="submit"] {
+            width: 100%;
+            min-height: 48px;
+            font-size: 1rem;
+        }
+    }
+    
+    /* Melhorias de acessibilidade para touch */
+    .nav-menu a,
+    .nav-menu button {
+        /* Área de toque mínima recomendada */
+        min-height: 44px;
+        min-width: 44px;
+        
+        /* Cursor pointer para indicar interatividade */
+        cursor: pointer;
+        
+        /* Outline para navegação por teclado */
+        outline-offset: 2px;
+    }
+    
+    .nav-menu a:focus,
+    .nav-menu button:focus {
+        outline: 2px solid var(--accent-color);
+        outline-offset: 2px;
+    }
+    
+    /* Feedback visual para toque */
+    .nav-menu a:active,
+    .nav-menu button:active {
+        transform: scale(0.98);
+    }
+    
+    /* Prevenção de zoom acidental em inputs */
+    .nav-menu input,
+    .nav-menu select,
+    .nav-menu textarea {
+        font-size: 16px;
+    }
+    
+    /* Animações suaves para transições */
+    .nav-menu * {
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* Reduzir animações se o usuário preferir */
+    @media (prefers-reduced-motion: reduce) {
+        .nav-menu * {
+            transition: none;
+        }
+    }
+    
+    /* Melhorias para landscape em dispositivos pequenos */
+    @media (orientation: landscape) {
+        .nav-menu {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .left-menu {
+            flex: 1;
+            justify-content: flex-start;
+        }
+        
+        .right-menu {
+            flex: none;
+            width: auto;
+        }
+        
+        .profile-container {
+            flex-direction: row;
+            width: auto;
+            padding: 0.5rem 0.75rem;
+        }
+        
+        .username {
+            min-width: auto;
+            text-align: left;
+        }
+    }
 }
 
 /* RESPONSIVIDADE TABLET */
@@ -937,6 +1214,28 @@ textarea#bio:focus {
     
     .fc-toolbar-title {
         font-size: 1.3rem !important;
+    }
+    
+    /* Melhorias para tablets em orientação portrait */
+    @media (orientation: portrait) {
+        .nav-menu {
+            gap: 0.75rem;
+        }
+        
+        .left-menu a {
+            min-height: 42px;
+            padding: 0.8rem 1rem;
+            font-size: 0.9rem;
+        }
+        
+        .profile-container {
+            padding: 0.75rem 1rem;
+        }
+        
+        .profile-img {
+            width: 38px;
+            height: 38px;
+        }
     }
 }
 
@@ -980,30 +1279,21 @@ body.dark-mode .fc-day-today {
     background-color: rgba(255, 107, 107, 0.2) !important;
 }
 
-.modal-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.5);
-    justify-content: center;
-    align-items: center;
-    display: none;
-    z-index: 9999;
-}
-
-.modal-content {
-    background: var(--bg-primary);
-    padding: 2rem;
-    border-radius: 12px;
-    max-width: 400px;
-    width: 90%;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-    animation: fadeIn 0.2s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
+/* Correções para modo escuro no mobile */
+@media (max-width: 768px) {
+    body.dark-mode .profile-container {
+        background-color: var(--bg-secondary);
+        border-color: var(--border-color);
+    }
+    
+    body.dark-mode .left-menu a.btn-secondary {
+        background-color: var(--bg-secondary);
+        border-color: var(--border-color);
+        color: var(--text-primary);
+    }
+    
+    body.dark-mode .left-menu a.btn-secondary:hover {
+        background-color: var(--bg-primary);
+        border-color: var(--accent-color);
+    }
 }
