@@ -1,0 +1,70 @@
+@import url(global.css);
+
+/* --- CSS dinâmico pode ir para seu style.css, aqui é ilustrativo --- */
+.notas-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    padding: 80px 32px 0 32px;
+}
+.nota-card {
+    background: var(--bg-secondary);
+    border-radius: 24px;
+    padding: 24px;
+    width: 260px;
+    height: 150px;
+    box-shadow: 0 0 8px #2225;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    color: var(--text-primary);
+    transition: transform .1s;
+}
+.nota-card:hover {
+    transform: scale(1.03);
+    background: #444;
+}
+.nota-title {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.nota-date {
+    font-size: 0.9rem;
+    color: #bababa;
+    font-weight: bold;
+    margin-top: 4px;
+}
+.add-note-btn {
+	text-decoration: none;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--accent-color);
+    color: var(--bg-primary);
+    border: none;
+    font-size: 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: background .2s;
+}
+.add-note-btn:hover {
+    background: var(--accent-color);
+	box-shadow: var(--shadow-hover);
+}
+
+/* --- Modal overlay --- */
+.nota-modal-bg {
+    display: none;
+    position: fixed;
+    z-index: 20;
+    top: 0;
+}
