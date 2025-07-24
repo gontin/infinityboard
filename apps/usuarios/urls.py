@@ -10,6 +10,7 @@ urlpatterns = [
     path('eventos-google/', views.eventos_google_calendar, name='eventos_google_calendar'),
     path('tarefas-json/', views.listar_tarefas_json, name='tarefas_json'),
     path('deletar_tarefa/', views.deletar_tarefa, name='deletar_tarefa'),
+    path('atualizar-status-tarefa/', views.atualizar_status_tarefa, name='atualizar_status_tarefa'),
     path("criar_tarefa", views.criar_tarefa, name="criar_tarefa"),
     path('testar-evento/', views.testar_evento_google),
     path('deletar-evento/', views.deletar_evento_teste),
