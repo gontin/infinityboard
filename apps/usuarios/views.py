@@ -206,7 +206,19 @@ def eventos_google_calendar(request):
             'end': event['end'].get('dateTime', event['end'].get('date')),
             'color': color,
         })
-
+    tarefas = Tarefa.objects.filter(usuario=request.user).order_by('data_inicio')
+    for t in tarefas:
+        eventos.append({
+            'id': f'bd-{t.id}',  # prefixo pra diferenciar dos eventos do Google
+            'title': t.titulo,
+            'start': t.data_inicio.isoformat(),
+            'end': t.data_fim.isoformat(),
+            'color': GOOGLE_COLOR_MAP.get(t.color_id, '#e1e1e1'),
+            'extendedProps': {
+                'tipo': t.tipo,
+                'concluida': t.concluida,
+            }
+        })
     return JsonResponse(eventos, safe=False)
 @csrf_exempt
 @login_required
@@ -241,7 +253,10 @@ def criar_tarefa(request):
             data_fim = make_aware(datetime.datetime.fromisoformat(data.get('data_fim')))
             usuario = request.user
 
-            event_id = criar_evento_google_calendar(titulo, data_inicio, data_fim, color_id)
+            if usuario.is_superuser:
+                event_id = criar_evento_google_calendar(titulo, data_inicio, data_fim, color_id)
+            else:
+                event_id = None 
 
             tarefa = Tarefa.objects.create(
                 usuario=usuario,

@@ -75,7 +75,16 @@
         <p>Aplicativo da Infinity</p>
         <a href="https://www.infinityschool.app" class="btn btn-primary">App</a>
     </div>
-
+<!-- modal pra aparecer evento -->
+<div id="evento-modal-bg" class="modal-bg" style="display: none;">
+  <div class="modal-content">
+     <div id="modal-evento-cor" style="width: 12px; height: 12px; border-radius: 50%; display: inline-block; vertical-align: middle; margin-right: 8px;"></div>
+    <h3 id="modal-evento-titulo">Título do Evento</h3>
+    <p id="modal-evento-descricao">Descrição aqui</p>
+    <p id="modal-evento-data">Data do evento</p>
+    <button class="btn" onclick="document.getElementById('evento-modal-bg').style.display='none'">Fechar</button>
+  </div>
+</div>
 
 <!-- Modal do formulário de tarefa -->
 <div id="modal-tarefa" style="display: none;">
@@ -87,7 +96,6 @@
                 <label for="titulo">Título:</label>
                 <input type="text" id="titulo" name="titulo" required placeholder="Digite o título da tarefa">
             </div>
-
             <div class="form-group">
                 <label for="tipo">Tipo:</label>
                 <input type="text" id="tipo" name="tipo" placeholder="Ex: Reunião, Estudo, Trabalho">

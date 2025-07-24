@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
         '7': '#46d6db',   // Turquesa
         '8': '#e1e1e1',   // Cinza
         '9': '#5484ed',   // Azul Claro
-        '10': '#51b749', // Magenta
-        '11': '#dc2127', // Verde Limão
+        '10': '#FF00FF', // Magenta
+        '11': '#89ff65ff', // Verde Limão
     };
 
     var calendarEl = document.getElementById('calendar');
@@ -47,6 +47,38 @@ document.addEventListener('DOMContentLoaded', function () {
             const dataFormatada = info.dateStr + "T09:00"; // Exemplo hora 09:00
             document.getElementById('data-inicio').value = dataFormatada;
             document.getElementById('data-fim').value = dataFormatada;
+        },
+        eventClick: function(info) {
+            info.jsEvent.preventDefault();
+
+            const evento = info.event;
+
+            // Mostra título, descrição e data formatada
+            document.getElementById('modal-evento-titulo').textContent = evento.title || "Sem título";
+            document.getElementById('modal-evento-descricao').textContent = evento.extendedProps.tipo || "Sem tipo";
+
+            const corEvento = evento.backgroundColor || evento.extendedProps.color || evento.color;
+            const corDiv = document.getElementById('modal-evento-cor');
+            if (corDiv) corDiv.style.backgroundColor = corEvento;
+
+            const inicio = new Date(evento.start);
+            const fim = evento.end ? new Date(evento.end) : null;
+
+            let dataTexto = inicio.toLocaleString('pt-BR', {
+                dateStyle: 'short',
+                timeStyle: 'short'
+            });
+
+            if (fim) {
+                dataTexto += " até " + fim.toLocaleString('pt-BR', {
+                    timeStyle: 'short'
+                });
+            }
+
+            document.getElementById('modal-evento-data').textContent = dataTexto;
+
+            // Abre o modal
+            document.getElementById('evento-modal-bg').style.display = 'flex';
         }
     });
     
