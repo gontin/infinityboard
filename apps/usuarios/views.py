@@ -152,6 +152,7 @@ def listar_tarefas_json(request):
             'data_inicio': t.data_inicio.isoformat(),
             'data_fim': t.data_fim.isoformat(),
             'colorId': t.color_id,  # se tiver
+            'concluida': t.concluida,
         })
     return JsonResponse(dados, safe=False)
 
@@ -207,7 +208,25 @@ def eventos_google_calendar(request):
         })
 
     return JsonResponse(eventos, safe=False)
+@csrf_exempt
+@login_required
+def atualizar_status_tarefa(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            tarefa_id = data.get('id')
+            concluida = data.get('concluida')
 
+            tarefa = Tarefa.objects.get(id=tarefa_id, usuario=request.user)
+            tarefa.concluida = concluida
+            tarefa.save()
+
+            return JsonResponse({'success': True})
+        except Tarefa.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'Tarefa não encontrada'})
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+    return JsonResponse({'success': False, 'error': 'Método inválido'}, status=400)
 @csrf_exempt
 @login_required
 def criar_tarefa(request):
@@ -231,7 +250,8 @@ def criar_tarefa(request):
                 data_inicio=data_inicio,
                 data_fim=data_fim,
                 google_event_id=event_id,
-                color_id=color_id
+                color_id=color_id,
+                concluida=False
             )
 
             return JsonResponse({

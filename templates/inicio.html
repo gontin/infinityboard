@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Dashboard - Infinity School{% endblock %}
 
 {% block header_title %}Dashboard{% endblock %}
@@ -34,6 +34,28 @@
     <p>Acesse suas funcionalidades principais</p>
 </div>
 
+<!-- Container principal com calendário e tarefas lado a lado -->
+<div class="calendar-tasks-container">
+    <!-- Seção do Calendário -->
+    <div class="calendar-section">
+        <div class="card calendar-card">
+            <h3>Calendário</h3>
+            <div id="calendar"></div>
+        </div>
+    </div>
+
+    <!-- Seção das Tarefas -->
+    <div class="tasks-section">
+        <div class="card tasks-card">
+            <h3>Suas Tarefas</h3>
+            <p>Lista de tarefas</p>
+            <div id="lista-tarefas">
+                <!-- Tarefas serão carregadas aqui via JavaScript -->
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="dashboard-grid">
     <div class="card">
         <h3>Planilhas</h3>
@@ -51,19 +73,6 @@
         <h3>Infinity App</h3>
         <p>Aplicativo da Infinity</p>
         <a href="https://www.infinityschool.app" class="btn btn-primary">App</a>
-    </div>
-    
-    <div class="card">
-        <h3>Suas Tarefas</h3>
-        <p>Lista de tarefas</p>
-        <div id="lista-tarefas">
-            <!-- Tarefas serão carregadas aqui via JavaScript -->
-        </div>
-    </div>
-    
-    <div class="card calendar-card">
-        <h3>Calendário</h3>
-        <div id="calendar"></div>
     </div>
 </div>
 
@@ -121,185 +130,19 @@
 
 {% block scripts %}
 <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
-
+<!-- Configuração das URLs para o JavaScript -->
 <script>
-document.addEventListener('DOMContentLoaded', function () {
-    // Mapeamento das cores do Google Calendar
-    const GOOGLE_COLOR_MAP = {
-        '1': '#a4bdfc',   // Azul
-        '2': '#7ae7bf',   // Verde
-        '3': '#dbadff',   // Roxo
-        '4': '#ff887c',   // Vermelho
-        '5': '#fbd75b',   // Laranja
-        '6': '#ffb878',   // Amarelo
-        '7': '#46d6db',   // Turquesa
-        '8': '#e1e1e1',   // Cinza
-        '9': '#5484ed',   // Azul Claro
-        '10': '#51b749', // Magenta
-        '11': '#dc2127', // Verde Limão
-    };
-
-    var calendarEl = document.getElementById('calendar');
-
-    window.calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth',
-        locale: 'pt-br',
-        selectable: true,
-        headerToolbar: {
-            center: '',
-            right: 'prev,next today',
-            left: 'title'
-        },
-        footerToolbar: {
-            left: '',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay'
-        },
-        buttonText: {
-            today:    'Hoje',
-            month:    'Mês',
-            week:     'Semana',
-            day:      'Dia',
-            list:     'Lista'
-        },
-
-        events: "{% url 'eventos_google_calendar' %}",
-
-        dateClick: function(info) {
-            mostrarFormulario();
-            // Preenche os inputs do formulário com a data clicada
-            const dataFormatada = info.dateStr + "T09:00"; // Exemplo hora 09:00
-            document.getElementById('data-inicio').value = dataFormatada;
-            document.getElementById('data-fim').value = dataFormatada;
-        }
-    });
-    
-    console.log('renderizando calendario')
-    calendar.render();
-    carregarListaTarefas();
-
-    const form = document.getElementById('form-tarefa');
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const titulo = document.getElementById('titulo').value;
-        const tipo = document.getElementById('tipo').value;
-        const data_inicio = document.getElementById('data-inicio').value;
-        const data_fim = document.getElementById('data-fim').value;
-        const colorId = document.getElementById('colorId').value;
-        if (new Date(data_inicio) < new Date()) {
-            alert("Você não pode criar tarefas no passado!");
-            return;
-        }
-        fetch("{% url 'criar_tarefa' %}", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken')
-            },
-            body: JSON.stringify({
-                titulo,
-                tipo,
-                data_inicio,
-                data_fim,
-                colorId  // <-- adicionado aqui
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if(data.success) {
-                calendar.refetchEvents();
-                carregarListaTarefas()
-                cancelarFormulario()
-            } else {
-                alert('Erro ao salvar tarefa');
-            }
-        });
-    });
-    
-    function carregarListaTarefas() {
-        fetch("{% url 'tarefas_json' %}")
-        .then(response => response.json())
-        .then(tarefas => {
-            const listaTarefasDiv = document.getElementById('lista-tarefas');
-            listaTarefasDiv.innerHTML = '';  // limpa a lista
-
-            tarefas.forEach(tarefa => {
-                const tarefaElem = document.createElement('div');
-                tarefaElem.className = 'tarefa-item';
-
-                // Obtém a cor baseada no colorId da tarefa
-                const cor = GOOGLE_COLOR_MAP[tarefa.colorId] || '#e1e1e1';
-
-                // Cria o indicador de cor
-                const indicadorCor = document.createElement('div');
-                indicadorCor.className = 'color-indicator';
-                indicadorCor.style.backgroundColor = cor;
-
-                const texto = document.createElement('span');
-                texto.className = 'tarefa-texto';
-                texto.textContent = `${tarefa.titulo} (${tarefa.tipo}) - ${new Date(tarefa.data_inicio).toLocaleString()}`;
-
-                const btnExcluir = document.createElement('button');
-                btnExcluir.className = 'btn-excluir';
-                btnExcluir.textContent = '🗑️ Excluir';
-                btnExcluir.onclick = () => {
-                    if (confirm('Tem certeza que deseja excluir esta tarefa?')) {
-                        fetch("{% url 'deletar_tarefa' %}", {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRFToken': getCookie('csrftoken')
-                            },
-                            body: JSON.stringify({ id: tarefa.id })
-                        })
-                        .then(res => res.json())
-                        .then(data => {
-                            if (data.success) {
-                                carregarListaTarefas();
-                                calendar.refetchEvents();
-                            } else {
-                                alert('Erro ao excluir tarefa: ' + (data.error || 'Erro desconhecido'));
-                            }
-                        });
-                    }
-                };
-
-                tarefaElem.appendChild(indicadorCor);
-                tarefaElem.appendChild(texto);
-                tarefaElem.appendChild(btnExcluir);
-                listaTarefasDiv.appendChild(tarefaElem);
-            });
-        });
-    }
-    
-    function mostrarFormulario() {
-        document.getElementById('modal-tarefa').style.display = 'flex';
-    }
-    
-    document.getElementById('btn-cancelar').addEventListener('click', cancelarFormulario);
-    
-    function cancelarFormulario() {
-        document.getElementById('modal-tarefa').style.display = 'none';
-    }
-
-    function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let cookie of cookies) {
-                cookie = cookie.trim();
-                if (cookie.startsWith(name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-
-});
+    // Configurar URLs para o JavaScript externo
+    window.eventosUrl = "{% url 'eventos_google_calendar' %}";
+    window.criarTarefaUrl = "{% url 'criar_tarefa' %}";
+    window.atualizarStatusTarefaUrl = "{% url 'atualizar_status_tarefa' %}";
+    window.tarefasJsonUrl = "{% url 'tarefas_json' %}";
+    window.deletarTarefaUrl = "{% url 'deletar_tarefa' %}";
 </script>
+
+<!-- Arquivo JavaScript externo -->
+<script src="{% static 'js/dashboard.js' %}"></script>
 {% endblock %}
 

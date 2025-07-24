@@ -18,6 +18,7 @@ class Tarefa(models.Model):
     tipo = models.CharField(max_length=100)
     data_inicio = models.DateTimeField()
     data_fim = models.DateTimeField()
+    concluida = models.BooleanField(default=False)
     google_event_id = models.CharField(max_length=255, blank=True)
     color_id = models.CharField(max_length=2, default='8')  # Novo campo
 
