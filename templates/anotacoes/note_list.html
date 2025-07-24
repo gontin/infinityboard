@@ -3,9 +3,6 @@
 
 {% block content %}
 
-<!-- Botão flutuante para adicionar nota -->
-<a href="{% url 'note_create' %}" class="add-note-btn" title="Nova Nota">+</a>
-
 <div class="notes-bar">
     {% for note in notes %}
         <div class="note-card" onclick="openNoteModal({{ note.id }})">
@@ -21,6 +18,9 @@
         <div style="color:#888; font-size:1.1em;">Nenhuma nota criada ainda.</div>
     {% endfor %}
 </div>
+
+<!-- Botão flutuante para adicionar nota -->
+<a href="{% url 'note_create' %}" class="add-note-btn" title="Nova Nota">+</a>
 
 {% endblock content %}
 
