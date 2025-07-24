@@ -3,16 +3,17 @@
 
 {% block content %}
 
-<div class="notes-bar">
+<div class="notas-container">
     {% for note in notes %}
-        <div class="note-card" onclick="openNoteModal({{ note.id }})">
+        <div class="nota-card" onclick="openNoteModal({{ note.id }})">
             <div style="flex:1">
                 <div style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; max-width:100%;">
                     {{ note.content|truncatechars:85 }}
                 </div>
             </div>
-            <div class="note-title">{{ note.title|default:"Sem título" }}</div>
-            <div class="note-date">{{ note.created_at|date:"d/m/Y" }}</div>
+            <div class="nota-title">{{ note.title|default:"Sem título" }}</div>
+            <div class="nota-date">{{ note.created_at|date:"d/m/Y" }}</div>
+			<div ></div>
         </div>
     {% empty %}
         <div style="color:#888; font-size:1.1em;">Nenhuma nota criada ainda.</div>
@@ -23,42 +24,3 @@
 <a href="{% url 'note_create' %}" class="add-note-btn" title="Nova Nota">+</a>
 
 {% endblock content %}
-
-<script>
-	const NOTES = [
-	{% for note in notes %}
-		{
-			id: {{ note.id }},
-			title: `{{ note.title|escapejs }}`,
-			content: `{{ note.content|linebreaksbr|escapejs }}`,
-			created: "{{ note.created_at|date:'d/m/Y' }}"
-		},
-	{% endfor %}
-	];
-	
-	// Passe as notas para JS (seguro porque não expõe dados sensíveis)
-
-	function openNoteModal(noteId) {
-		const modalBg = document.getElementById("note-modal-bg");
-		const modalTitle = document.getElementById("modal-title");
-		const modalContent = document.getElementById("modal-content");
-
-		const note = NOTES.find(n => n.id === noteId);
-		if (note) {
-			modalTitle.textContent = note.title || "Sem título";
-			modalContent.innerHTML = note.content;
-			modalBg.classList.add('active');
-		}
-	}
-	function closeNoteModal() {
-		document.getElementById("note-modal-bg").classList.remove('active');
-	}
-	// Fecha modal ao clicar fora da caixa
-	document.getElementById("note-modal-bg").onclick = function(e) {
-		if (e.target === this) closeNoteModal();
-	}
-	// (Opcional: fechar com ESC)
-	window.addEventListener("keydown", function(e){
-		if (e.key === "Escape") closeNoteModal();
-	});
-</script>
