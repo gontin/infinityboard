@@ -13,14 +13,55 @@
             </div>
             <div class="nota-title">{{ note.title|default:"Sem título" }}</div>
             <div class="nota-date">{{ note.created_at|date:"d/m/Y" }}</div>
-			<div ></div>
         </div>
     {% empty %}
         <div style="color:#888; font-size:1.1em;">Nenhuma nota criada ainda.</div>
     {% endfor %}
 </div>
 
-<!-- Botão flutuante para adicionar nota -->
-<a href="{% url 'note_create' %}" class="add-note-btn" title="Nova Nota">+</a>
+<button class="add-note-btn" id="addNoteBtn">+</button>
 
 {% endblock content %}
+<script src="{% static "js/app.js" %}"></script>
+
+
+<script>
+	console.log("CARREGOU")
+	function openNoteModal(noteId) {
+		const data = notesData[noteId];
+		console.log(notesData[noteId])
+		alert("OpenNoteModal")
+
+		if (!data) return;
+
+		document.getElementById('noteModalTitle').textContent = data.title || 'Sem título';
+		document.getElementById('noteModalContent').innerHTML = data.content.replace(/\n/g, '<br>');
+		document.getElementById('noteModalDate').textContent = new Date(data.created_at).toLocaleDateString('pt-BR');
+		
+		// Configurar botões de ação
+		document.getElementById('editNoteBtn').onclick = () => {
+			alert('Funcionalidade de editar seria implementada aqui');
+		};
+		
+		document.getElementById('deleteNoteBtn').onclick = () => {
+			if (confirm('Tem certeza que deseja excluir esta nota?')) {
+				alert('Funcionalidade de excluir seria implementada aqui');
+			}
+		};
+		
+		// Mostrar modal
+		document.getElementById('modalOverlay').style.display = 'flex';
+	}
+
+	// Fechar modal de visualização
+	document.getElementById('closeNoteModal').onclick = function() {
+		document.getElementById('modalOverlay').style.display = 'none';
+	};
+
+	// Fechar modal clicando fora
+	document.getElementById('modalOverlay').onclick = function(e) {
+		if (e.target === this) {
+			this.style.display = 'none';
+		}
+	};
+</script>

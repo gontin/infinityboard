@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anotações - Demo</title>
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <h1 class="app-title">Anotações</h1>
+                <div class="header-actions">
+                    <div class="user-info">
+                        <img src="static/images/user-avatar.png" alt="Avatar" class="user-avatar">
+                        <span class="user-name">Lucas Cordeiro</span>
+                        <a href="#" class="logout-btn">Logout</a>
+                    </div>
+                    <button class="theme-toggle" id="themeToggle">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="app-nav">
+            <div class="nav-content">
+                <a href="#" class="nav-item">Dashboard</a>
+                <a href="#" class="nav-item">Perfil</a>
+                <a href="#" class="nav-item">Calendário</a>
+                <a href="#" class="nav-item active">Anotações</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <div class="notes-container">
+                <div class="notes-grid">
+                    <!-- Nota de exemplo 1 -->
+                    <div class="note-card" onclick="openNoteModal(1)">
+                        <div class="note-preview">
+                            <div class="note-content-preview">
+                                Esta é uma nota de exemplo com conteúdo mais longo para demonstrar como o texto é truncado quando excede o limite de caracteres permitidos na visualização do card...
+                            </div>
+                        </div>
+                        <div class="note-info">
+                            <div class="note-title">Reunião de Projeto</div>
+                            <div class="note-date">20/07/2025</div>
+                        </div>
+                        <div class="note-attachments-indicator">
+                            <span class="attachment-icon">📷</span>
+                        </div>
+                    </div>
+
+                    <!-- Nota de exemplo 2 -->
+                    <div class="note-card" onclick="openNoteModal(2)">
+                        <div class="note-preview">
+                            <div class="note-content-preview">
+                                Lista de tarefas para hoje:
+                                - Revisar código
+                                - Atualizar documentação
+                                - Testar nova funcionalidade
+                            </div>
+                        </div>
+                        <div class="note-info">
+                            <div class="note-title">Lista de Tarefas</div>
+                            <div class="note-date">19/07/2025</div>
+                        </div>
+                    </div>
+
+                    <!-- Nota de exemplo 3 -->
+                    <div class="note-card" onclick="openNoteModal(3)">
+                        <div class="note-preview">
+                            <div class="note-content-preview">
+                                Ideias para o novo design:
+                                - Interface mais limpa
+                                - Cores mais suaves
+                                - Melhor organização dos elementos
+                            </div>
+                        </div>
+                        <div class="note-info">
+                            <div class="note-title">Ideias de Design</div>
+                            <div class="note-date">18/07/2025</div>
+                        </div>
+                        <div class="note-attachments-indicator">
+                            <span class="attachment-icon">📄</span>
+                        </div>
+                    </div>
+
+                    <!-- Nota de exemplo 4 -->
+                    <div class="note-card" onclick="openNoteModal(4)">
+                        <div class="note-preview">
+                            <div class="note-content-preview">
+                                Anotações da aula de JavaScript:
+                                - Promises e async/await
+                                - Manipulação do DOM
+                                - Event listeners
+                            </div>
+                        </div>
+                        <div class="note-info">
+                            <div class="note-title">Aula JavaScript</div>
+                            <div class="note-date">17/07/2025</div>
+                        </div>
+                    </div>
+
+                    <!-- Nota sem título -->
+                    <div class="note-card" onclick="openNoteModal(5)">
+                        <div class="note-preview">
+                            <div class="note-content-preview">
+                                Uma nota rápida sem título para testar como o sistema lida com notas que não possuem título definido pelo usuário.
+                            </div>
+                        </div>
+                        <div class="note-info">
+                            <div class="note-title">Sem título</div>
+                            <div class="note-date">16/07/2025</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Add Note Button -->
+        <button class="add-note-btn" id="addNoteBtn" title="Nova Nota">
+            <span class="add-icon">+</span>
+        </button>
+    </div>
+
+
+    <script src="static/js/app.js"></script>
+<body>
+</html>
+
