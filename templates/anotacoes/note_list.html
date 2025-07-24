@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Anotações - Infinity School{% endblock %}
+
+{% block header_title %}Anotações{% endblock %}
+
+{% block header %}
+<nav class="nav-menu">
+    <div class="left-menu">
+        <a href="{% url 'inicio' %}" class="btn btn-secondary">Dashboard</a>
+        <a href="{% url 'perfil' %}" class="btn btn-secondary">Perfil</a>
+        <a href="{% url 'note_list' %}" class="btn btn-primary">Anotações</a>
+    </div>
+
+    <div class="right-menu">
+        <div class="profile-container">
+            <img src="{{ user.perfil.foto }}" alt="Foto de Perfil" class="profile-img">
+            <span class="username">{{ user.perfil }}</span>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Logout</button>
+            </form>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+<link rel="stylesheet" href="{% static "css/note_list.css" %}">
+
+{% block content %}
+
+<!-- Botão flutuante para adicionar nota -->
+<a href="{% url 'note_create' %}" class="add-note-btn" title="Nova Nota">+</a>
+
+<div class="notes-bar">
+    {% for note in notes %}
+        <div class="note-card" onclick="openNoteModal({{ note.id }})">
+            <div style="flex:1">
+                <div style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; max-width:100%;">
+                    {{ note.content|truncatechars:85 }}
+                </div>
+            </div>
+            <div class="note-title">{{ note.title|default:"Sem título" }}</div>
+            <div class="note-date">{{ note.created_at|date:"d/m/Y" }}</div>
+        </div>
+    {% empty %}
+        <div style="color:#888; font-size:1.1em;">Nenhuma nota criada ainda.</div>
+    {% endfor %}
+</div>
+
+<!-- MODAL: conteúdo da nota -->
+<div class="modal-bg" id="note-modal-bg">
+    <div class="note-modal" id="note-modal-content">
+        <span class="close-modal" onclick="closeNoteModal()">&times;</span>
+        <div class="note-modal-title" id="modal-title"></div>
+        <div class="note-modal-content" id="modal-content"></div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<script>
+	const NOTES = [
+	{% for note in notes %}
+		{
+			id: {{ note.id }},
+			title: `{{ note.title|escapejs }}`,
+			content: `{{ note.content|linebreaksbr|escapejs }}`,
+			created: "{{ note.created_at|date:'d/m/Y' }}"
+		},
+	{% endfor %}
+];
+</script>
+
+<script src="{% static 'scripts/note_list.js' %}"></script>
