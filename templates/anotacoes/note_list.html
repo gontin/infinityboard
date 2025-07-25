@@ -22,4 +22,41 @@
     {% endfor %}
 </div>
 
+<div class="modal-overlay" id="modalOverlay" style="display: none;">
+	<div class="modal-content">
+	  <h2 id="noteTitle"></h2>
+	  <p id="noteContent"></p>
+	  <div class="form-actions">
+		<button class="btn btn-secondary" onclick="closeNoteModal()">Fechar</button>
+	  </div>
+	</div>
+  </div>
+
 {% endblock content %}
+
+{% block scripts %}
+<script>
+	let NOTES = [
+    {% for note in notes %}
+      {
+        id: {{ note.id }},
+        title: `{{ note.title|escapejs }}`,
+        content: `{{ note.content|escapejs }}`
+      }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+	];
+
+	function openNoteModal(noteId) {
+		const note = NOTES.find(n => n.id === noteId);
+		if (note) {
+		  document.getElementById("noteTitle").innerText = note.title;
+		  document.getElementById("noteContent").innerText = note.content;
+		  document.getElementById("modalOverlay").style.display = "flex";
+		}
+	  }
+	
+	  function closeNoteModal() {
+		document.getElementById("modalOverlay").style.display = "none";
+	  }
+</script>
+{% endblock scripts %}
