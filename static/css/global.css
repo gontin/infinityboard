@@ -7,7 +7,8 @@
     --text-secondary: #666666;
     --accent-color: #ff6b6b; /* Vermelho pastel */
     --border-color: #e0e0e0;
-    --modal-bg: rgba(121, 121, 121, 0.85);
+    --input-bg: #9d9d9d;
+    --modal-bg: rgba(189, 189, 189, 0.85);
     --shadow: 0 2px 4px rgba(0,0,0,0.1);
     --shadow-hover: 0 4px 8px rgba(0,0,0,0.15);
     --border-radius: 0.5rem;
@@ -23,6 +24,7 @@ body.dark-mode {
     --text-secondary: #cccccc;
     --accent-color: #c64132;
     --border-color: #404040;
+    --input-bg: #181818;
     --modal-bg: rgba(10, 10, 10, 0.85);
     --shadow: 0 2px 4px rgba(0,0,0,0.3);
     --shadow-hover: 0 4px 8px rgba(0,0,0,0.4);

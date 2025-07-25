@@ -29,6 +29,8 @@
     position: relative;
 }
 
+
+
 /* Animação de entrada */
 @keyframes modal-pop {
     from { transform: scale(.94) translateY(20px); opacity: 0; }
@@ -43,7 +45,7 @@
     margin-bottom: 6px;
 }
 
-.noteTitle {
+.note-title {
     font-size: 1.28rem;
     font-weight: 600;
     letter-spacing: 0.03em;
@@ -65,10 +67,10 @@
 }
 
 /* Inputs e textarea */
-.quick-form-group input,
-.quick-form-group textarea {
+.form-group input,
+.form-group textarea {
     width: 100%;
-    background: #181818;
+    background: var(--input-bg);
     border: 1.5px solid #252525;
     border-radius: 12px;
     color: #fff;
@@ -78,14 +80,14 @@
     resize: none;
     transition: border .18s;
 }
-.quick-form-group input:focus,
-.quick-form-group textarea:focus {
+.form-group input:focus,
+.form-group textarea:focus {
     outline: none;
     border-color: var(--accent-color, #ff5349);
 }
 
 /* Botões do modal */
-.quick-actions {
+.form-actions {
     display: flex;
     justify-content: flex-end;
     gap: 12px;
@@ -115,5 +117,3 @@
 .btn-quick[type="submit"] {
     background: var(--accent-color);
 }
-
-/* OVERLAY MODAL ================ */
