@@ -4,8 +4,7 @@
 {% block content %}
 
 <!-- Botão flutuante para adicionar nota -->
-<a class="add-note-btn" title="Nova Nota">+</a>
-<button class="add-note-btn">+</button>
+<a class="add-note-btn" id="addNoteBtn" href="{% url "note_create" %}">+</a>
 
 <div class="notas-container">
     {% for note in notes %}
@@ -24,6 +23,3 @@
 </div>
 
 {% endblock content %}
-{% block scripts %}
-<script src="{% static 'js/app.js' %}"></script>
-{% endblock scripts %}
