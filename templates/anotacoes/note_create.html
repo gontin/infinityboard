@@ -1,0 +1,27 @@
+{% extends "anotacoes/base_notas.html" %}
+{% load static %}
+
+{% block content %}
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content" id="modalContent">
+        <h2>Nova Anotação</h2>
+        <form method="POST" action="{% url 'note_create' %}" class="note-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.title.id_for_label }}">Título</label>
+                {{ form.title }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.content.id_for_label }}">Conteúdo</label>
+                {{ form.content }}
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+				<a class="btn btn-secondary" href="{% url "note_list" %}">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}
