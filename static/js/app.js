@@ -6,11 +6,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalContent = document.getElementById('modalContent');
     
     // Abrir modal de adicionar nota
-    if (addNoteBtn) {
-        addNoteBtn.addEventListener('click', function() {
-            openAddNoteModal();
-        });
-    }
+    // if (addNoteBtn) {
+    //     addNoteBtn.addEventListener('click', function() {
+    //         openAddNoteModal();
+    //     });
+    // }
     
     // Fechar modal clicando no overlay
     if (modalOverlay) {
@@ -29,84 +29,84 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Função para abrir modal de adicionar nota
-function openAddNoteModal() {
-    const modalOverlay = document.getElementById('modalOverlay');
-    const modalContent = document.getElementById('modalContent');
+// // Função para abrir modal de adicionar nota
+// function openAddNoteModal() {
+//     const modalOverlay = document.getElementById('modalOverlay');
+//     const modalContent = document.getElementById('modalContent');
 
-    // Carregar conteúdo do modal
-    modalContent.innerHTML = `
-        <div class="add-note-modal">
-            <div class="modal-header">
-                <h3 class="modal-title">Nova Nota</h3>
-                <button type="button" class="modal-close" onclick="closeModal()">
-                    <span class="close-icon">×</span>
-                </button>
-            </div>
+//     // Carregar conteúdo do modal
+//     modalContent.innerHTML = `
+//         <div class="add-note-modal">
+//             <div class="modal-header">
+//                 <h3 class="modal-title">Nova Nota</h3>
+//                 <button type="button" class="modal-close" onclick="closeModal()">
+//                     <span class="close-icon">×</span>
+//                 </button>
+//             </div>
             
-            <form class="quick-note-form" id="quickNoteForm">
-                <input type="hidden" name="csrfmiddlewaretoken" value="${getCSRFToken()}">
+//             <form class="quick-note-form" id="quickNoteForm">
+//                 <input type="hidden" name="csrfmiddlewaretoken" value="${getCSRFToken()}">
                 
-                <div class="quick-form-group">
-                    <input type="text" 
-                           name="title" 
-                           id="quickTitle" 
-                           class="quick-input title-quick" 
-                           placeholder="Título da nota..."
-                           maxlength="200">
-                </div>
+//                 <div class="quick-form-group">
+//                     <input type="text" 
+//                            name="title" 
+//                            id="quickTitle" 
+//                            class="quick-input title-quick" 
+//                            placeholder="Título da nota..."
+//                            maxlength="200">
+//                 </div>
                 
-                <div class="quick-form-group">
-                    <textarea name="content" 
-                              id="quickContent" 
-                              class="quick-textarea" 
-                              placeholder="Digite sua nota aqui..."
-                              rows="8"
-                              required></textarea>
-                </div>
+//                 <div class="quick-form-group">
+//                     <textarea name="content" 
+//                               id="quickContent" 
+//                               class="quick-textarea" 
+//                               placeholder="Digite sua nota aqui..."
+//                               rows="8"
+//                               required></textarea>
+//                 </div>
                 
-                <div class="quick-attachments">
-                    <label class="attachment-btn" for="quickImage">
-                        <span class="attachment-icon">📷</span>
-                        <span class="attachment-text">Imagem</span>
-                        <input type="file" id="quickImage" name="image" accept="image/*" style="display: none;">
-                    </label>
+//                 <div class="quick-attachments">
+//                     <label class="attachment-btn" for="quickImage">
+//                         <span class="attachment-icon">📷</span>
+//                         <span class="attachment-text">Imagem</span>
+//                         <input type="file" id="quickImage" name="image" accept="image/*" style="display: none;">
+//                     </label>
                     
-                    <label class="attachment-btn" for="quickPdf">
-                        <span class="attachment-icon">📄</span>
-                        <span class="attachment-text">PDF</span>
-                        <input type="file" id="quickPdf" name="pdf" accept=".pdf" style="display: none;">
-                    </label>
-                </div>
+//                     <label class="attachment-btn" for="quickPdf">
+//                         <span class="attachment-icon">📄</span>
+//                         <span class="attachment-text">PDF</span>
+//                         <input type="file" id="quickPdf" name="pdf" accept=".pdf" style="display: none;">
+//                     </label>
+//                 </div>
                 
-                <div class="attachment-preview-quick" id="attachmentPreviewQuick">
-                    <!-- Preview dos anexos -->
-                </div>
+//                 <div class="attachment-preview-quick" id="attachmentPreviewQuick">
+//                     <!-- Preview dos anexos -->
+//                 </div>
                 
-                <div class="quick-actions">
-                    <button type="button" class="btn-quick btn-cancel" onclick="closeModal()">
-                        Cancelar
-                    </button>
-                    <button type="submit" class="btn-quick btn-save" id="saveQuick">
-                        <span class="save-icon">💾</span>
-                        Salvar
-                    </button>
-                </div>
-            </form>
-        </div>
-    `;
+//                 <div class="quick-actions">
+//                     <button type="button" class="btn-quick btn-cancel" onclick="closeModal()">
+//                         Cancelar
+//                     </button>
+//                     <button type="submit" class="btn-quick btn-save" id="saveQuick">
+//                         <span class="save-icon">💾</span>
+//                         Salvar
+//                     </button>
+//                 </div>
+//             </form>
+//         </div>
+//     `;
     
-    // Mostrar modal
-    modalOverlay.style.display = 'absolute';
+//     // Mostrar modal
+//     modalOverlay.style.display = 'absolute';
     
-    // Focar no campo de título
-    setTimeout(() => {
-        document.getElementById('quickTitle').focus();
-    }, 100);
+//     // Focar no campo de título
+//     setTimeout(() => {
+//         document.getElementById('quickTitle').focus();
+//     }, 100);
     
-    // Configurar eventos do formulário
-    setupQuickNoteForm();
-}
+//     // Configurar eventos do formulário
+//     setupQuickNoteForm();
+// }
 
 // Função para fechar modal
 function closeModal() {
@@ -116,72 +116,72 @@ function closeModal() {
     }
 }
 
-// Configurar formulário de nota rápida
-function setupQuickNoteForm() {
-    const form = document.getElementById('quickNoteForm');
-    const imageInput = document.getElementById('quickImage');
-    const pdfInput = document.getElementById('quickPdf');
-    const previewArea = document.getElementById('attachmentPreviewQuick');
+// // Configurar formulário de nota rápida
+// function setupQuickNoteForm() {
+//     const form = document.getElementById('quickNoteForm');
+//     const imageInput = document.getElementById('quickImage');
+//     const pdfInput = document.getElementById('quickPdf');
+//     const previewArea = document.getElementById('attachmentPreviewQuick');
     
-    // Submit do formulário
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        saveQuickNote();
-    });
+//     // Submit do formulário
+//     form.addEventListener('submit', function(e) {
+//         e.preventDefault();
+//         saveQuickNote();
+//     });
     
-    // Preview de imagem
-    imageInput.addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            previewAttachment(file, 'image', previewArea);
-        }
-    });
+//     // Preview de imagem
+//     imageInput.addEventListener('change', function(e) {
+//         const file = e.target.files[0];
+//         if (file) {
+//             previewAttachment(file, 'image', previewArea);
+//         }
+//     });
     
-    // Preview de PDF
-    pdfInput.addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            previewAttachment(file, 'pdf', previewArea);
-        }
-    });
-}
+//     // Preview de PDF
+//     pdfInput.addEventListener('change', function(e) {
+//         const file = e.target.files[0];
+//         if (file) {
+//             previewAttachment(file, 'pdf', previewArea);
+//         }
+//     });
+// }
 
-// Preview de anexos
-function previewAttachment(file, type, previewArea) {
-    const previewDiv = document.createElement('div');
-    previewDiv.className = 'attachment-preview-item';
+// // Preview de anexos
+// function previewAttachment(file, type, previewArea) {
+//     const previewDiv = document.createElement('div');
+//     previewDiv.className = 'attachment-preview-item';
     
-    if (type === 'image') {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            previewDiv.innerHTML = `
-                <div class="preview-image">
-                    <img src="${e.target.result}" alt="Preview" style="max-width: 100px; max-height: 100px; border-radius: 4px;">
-                    <button type="button" class="remove-attachment" onclick="removeAttachment(this, 'quickImage')">×</button>
-                </div>
-                <span class="preview-name">${file.name}</span>
-            `;
-        };
-        reader.readAsDataURL(file);
-    } else if (type === 'pdf') {
-        previewDiv.innerHTML = `
-            <div class="preview-pdf">
-                <span class="pdf-icon">📄</span>
-                <button type="button" class="remove-attachment" onclick="removeAttachment(this, 'quickPdf')">×</button>
-            </div>
-            <span class="preview-name">${file.name}</span>
-        `;
-    }
+//     if (type === 'image') {
+//         const reader = new FileReader();
+//         reader.onload = function(e) {
+//             previewDiv.innerHTML = `
+//                 <div class="preview-image">
+//                     <img src="${e.target.result}" alt="Preview" style="max-width: 100px; max-height: 100px; border-radius: 4px;">
+//                     <button type="button" class="remove-attachment" onclick="removeAttachment(this, 'quickImage')">×</button>
+//                 </div>
+//                 <span class="preview-name">${file.name}</span>
+//             `;
+//         };
+//         reader.readAsDataURL(file);
+//     } else if (type === 'pdf') {
+//         previewDiv.innerHTML = `
+//             <div class="preview-pdf">
+//                 <span class="pdf-icon">📄</span>
+//                 <button type="button" class="remove-attachment" onclick="removeAttachment(this, 'quickPdf')">×</button>
+//             </div>
+//             <span class="preview-name">${file.name}</span>
+//         `;
+//     }
     
-    previewArea.appendChild(previewDiv);
-}
+//     previewArea.appendChild(previewDiv);
+// }
 
-// Remover anexo
-function removeAttachment(button, inputId) {
-    const input = document.getElementById(inputId);
-    input.value = '';
-    button.closest('.attachment-preview-item').remove();
-}
+// // Remover anexo
+// function removeAttachment(button, inputId) {
+//     const input = document.getElementById(inputId);
+//     input.value = '';
+//     button.closest('.attachment-preview-item').remove();
+// }
 
 // Salvar nota rápida
 async function saveQuickNote() {
@@ -194,6 +194,7 @@ async function saveQuickNote() {
     saveBtn.disabled = true;
     
     try {
+        alert("FETCH POST")
         const response = await fetch('/anotacoes/nova/', {
             method: 'POST',
             body: formData,

@@ -1,13 +1,5 @@
-/* --- Modal overlay --- */
-.nota-modal-bg {
-    display: none;
-    position: fixed;
-    z-index: 20;
-    top: 0;
-}
-
 /* Overlay escuro */
-.modal-modal-bg {
+.modal-overlay {
     display: flex; /* Mostra/oculta via JS (display: none/block/flex) */
     position: fixed;
     z-index: 99;
@@ -22,7 +14,7 @@
 }
 
 /* Caixa do modal */
-.add-note-modal {
+.modal-content {
     background: var(--bg-secondary, #1a1a1a); /* Usa var ou fallback escuro */
     border-radius: 24px;
     padding: 32px 28px;
@@ -51,7 +43,7 @@
     margin-bottom: 6px;
 }
 
-.modal-title {
+.noteTitle {
     font-size: 1.28rem;
     font-weight: 600;
     letter-spacing: 0.03em;
