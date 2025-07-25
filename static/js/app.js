@@ -1,6 +1,5 @@
 // App principal - Funcionalidades gerais
 document.addEventListener('DOMContentLoaded', function() {
-    alert("Eventos")
     // Elementos DOM
     const addNoteBtn = document.getElementById('addNoteBtn');
     const modalOverlay = document.getElementById('modalOverlay');
@@ -9,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Abrir modal de adicionar nota
     if (addNoteBtn) {
         addNoteBtn.addEventListener('click', function() {
-            console.log("ADDNOTEMODAL")
             openAddNoteModal();
         });
     }
@@ -29,23 +27,12 @@ document.addEventListener('DOMContentLoaded', function() {
             closeModal();
         }
     });
-    
-    // Toggle do tema (futuro)
-    const themeToggle = document.getElementById('themeToggle');
-    if (themeToggle) {
-        themeToggle.addEventListener('click', function() {
-            // Implementar troca de tema futuramente
-            console.log('Toggle tema');
-        });
-    }
 });
 
 // Função para abrir modal de adicionar nota
 function openAddNoteModal() {
     const modalOverlay = document.getElementById('modalOverlay');
     const modalContent = document.getElementById('modalContent');
-    
-    console.log("ADD NOTA")
 
     // Carregar conteúdo do modal
     modalContent.innerHTML = `
@@ -110,7 +97,7 @@ function openAddNoteModal() {
     `;
     
     // Mostrar modal
-    modalOverlay.style.display = 'flex';
+    modalOverlay.style.display = 'absolute';
     
     // Focar no campo de título
     setTimeout(() => {

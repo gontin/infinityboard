@@ -38,8 +38,8 @@
 }
 .add-note-btn {
 	text-decoration: none;
-    position: absolute;
-    bottom: 80px;
+    position: fixed;
+    bottom: 20px;
     right: 0;
     transform: translateX(-50%);
     z-index: 5;
