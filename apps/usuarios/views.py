@@ -152,6 +152,7 @@ def listar_tarefas_json(request):
             'data_inicio': t.data_inicio.isoformat(),
             'data_fim': t.data_fim.isoformat(),
             'colorId': t.color_id,  # se tiver
+            'concluida': t.concluida,
         })
     return JsonResponse(dados, safe=False)
 
@@ -205,9 +206,39 @@ def eventos_google_calendar(request):
             'end': event['end'].get('dateTime', event['end'].get('date')),
             'color': color,
         })
-
+    tarefas = Tarefa.objects.filter(usuario=request.user).order_by('data_inicio')
+    for t in tarefas:
+        eventos.append({
+            'id': f'bd-{t.id}',  # prefixo pra diferenciar dos eventos do Google
+            'title': t.titulo,
+            'start': t.data_inicio.isoformat(),
+            'end': t.data_fim.isoformat(),
+            'color': GOOGLE_COLOR_MAP.get(t.color_id, '#e1e1e1'),
+            'extendedProps': {
+                'tipo': t.tipo,
+                'concluida': t.concluida,
+            }
+        })
     return JsonResponse(eventos, safe=False)
+@csrf_exempt
+@login_required
+def atualizar_status_tarefa(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            tarefa_id = data.get('id')
+            concluida = data.get('concluida')
 
+            tarefa = Tarefa.objects.get(id=tarefa_id, usuario=request.user)
+            tarefa.concluida = concluida
+            tarefa.save()
+
+            return JsonResponse({'success': True})
+        except Tarefa.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'Tarefa não encontrada'})
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+    return JsonResponse({'success': False, 'error': 'Método inválido'}, status=400)
 @csrf_exempt
 @login_required
 def criar_tarefa(request):
@@ -222,7 +253,10 @@ def criar_tarefa(request):
             data_fim = make_aware(datetime.datetime.fromisoformat(data.get('data_fim')))
             usuario = request.user
 
-            event_id = criar_evento_google_calendar(titulo, data_inicio, data_fim, color_id)
+            if usuario.is_superuser:
+                event_id = criar_evento_google_calendar(titulo, data_inicio, data_fim, color_id)
+            else:
+                event_id = None 
 
             tarefa = Tarefa.objects.create(
                 usuario=usuario,
@@ -231,7 +265,8 @@ def criar_tarefa(request):
                 data_inicio=data_inicio,
                 data_fim=data_fim,
                 google_event_id=event_id,
-                color_id=color_id
+                color_id=color_id,
+                concluida=False
             )
 
             return JsonResponse({

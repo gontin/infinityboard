@@ -5,6 +5,27 @@
 
 {% block header_title %}Perfil do Usuário{% endblock %}
 
+{% block header %}
+<nav class="nav-menu">
+    <div class="left-menu">
+        <a href="{% url 'inicio' %}" class="btn btn-secondary">Dashboard</a>
+        <a href="{% url 'perfil' %}" class="btn btn-primary">Perfil</a>
+        <a href="{% url 'note_list' %}" class="btn btn-secondary">Anotações</a>
+    </div>
+
+    <div class="right-menu">
+        <div class="profile-container">
+            <img src="{{ user.perfil.foto }}" alt="Foto de Perfil" class="profile-img">
+            <span class="username">{{ user.perfil }}</span>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Logout</button>
+            </form>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
 {% block content %}
 <div class="profile-container">
     <div class="profile-card">
