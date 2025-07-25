@@ -1,5 +1,4 @@
 {% extends "anotacoes/base_notas.html" %}
-{% load static %}
 
 {% block content %}
 <div class="modal-overlay" id="modalOverlay">
@@ -18,8 +17,8 @@
             </div>
 
             <div class="form-actions">
-                <button type="submit" class="btn btn-primary">Salvar</button>
-				<a class="btn btn-secondary" href="{% url "note_list" %}">Cancelar</a>
+                <button type="submit" class="btn-quick btn-save btn-primary">Salvar</button>
+				<a class="btn-quick btn-cancel btn-secondary" href="{% url "note_list" %}">Cancelar</a>
             </div>
         </form>
     </div>
