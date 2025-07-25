@@ -29,6 +29,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+function closeModal() {
+    const modalOverlay = document.getElementById('modalOverlay');
+    if (modalOverlay) {
+        modalOverlay.style.display = 'none';
+    }
+}
+
 // // Função para abrir modal de adicionar nota
 // function openAddNoteModal() {
 //     const modalOverlay = document.getElementById('modalOverlay');
@@ -109,126 +116,10 @@ document.addEventListener('DOMContentLoaded', function() {
 // }
 
 // Função para fechar modal
-function closeModal() {
-    const modalOverlay = document.getElementById('modalOverlay');
-    if (modalOverlay) {
-        modalOverlay.style.display = 'none';
-    }
-}
 
-// // Configurar formulário de nota rápida
-// function setupQuickNoteForm() {
-//     const form = document.getElementById('quickNoteForm');
-//     const imageInput = document.getElementById('quickImage');
-//     const pdfInput = document.getElementById('quickPdf');
-//     const previewArea = document.getElementById('attachmentPreviewQuick');
-    
-//     // Submit do formulário
-//     form.addEventListener('submit', function(e) {
-//         e.preventDefault();
-//         saveQuickNote();
-//     });
-    
-//     // Preview de imagem
-//     imageInput.addEventListener('change', function(e) {
-//         const file = e.target.files[0];
-//         if (file) {
-//             previewAttachment(file, 'image', previewArea);
-//         }
-//     });
-    
-//     // Preview de PDF
-//     pdfInput.addEventListener('change', function(e) {
-//         const file = e.target.files[0];
-//         if (file) {
-//             previewAttachment(file, 'pdf', previewArea);
-//         }
-//     });
-// }
-
-// // Preview de anexos
-// function previewAttachment(file, type, previewArea) {
-//     const previewDiv = document.createElement('div');
-//     previewDiv.className = 'attachment-preview-item';
-    
-//     if (type === 'image') {
-//         const reader = new FileReader();
-//         reader.onload = function(e) {
-//             previewDiv.innerHTML = `
-//                 <div class="preview-image">
-//                     <img src="${e.target.result}" alt="Preview" style="max-width: 100px; max-height: 100px; border-radius: 4px;">
-//                     <button type="button" class="remove-attachment" onclick="removeAttachment(this, 'quickImage')">×</button>
-//                 </div>
-//                 <span class="preview-name">${file.name}</span>
-//             `;
-//         };
-//         reader.readAsDataURL(file);
-//     } else if (type === 'pdf') {
-//         previewDiv.innerHTML = `
-//             <div class="preview-pdf">
-//                 <span class="pdf-icon">📄</span>
-//                 <button type="button" class="remove-attachment" onclick="removeAttachment(this, 'quickPdf')">×</button>
-//             </div>
-//             <span class="preview-name">${file.name}</span>
-//         `;
-//     }
-    
-//     previewArea.appendChild(previewDiv);
-// }
-
-// // Remover anexo
-// function removeAttachment(button, inputId) {
-//     const input = document.getElementById(inputId);
-//     input.value = '';
-//     button.closest('.attachment-preview-item').remove();
-// }
-
-// Salvar nota rápida
-async function saveQuickNote() {
-    const form = document.getElementById('quickNoteForm');
-    const saveBtn = document.getElementById('saveQuick');
-    const formData = new FormData(form);
-    
-    // Mostrar loading
-    saveBtn.innerHTML = '<span class="spinner" style="width: 16px; height: 16px; margin-right: 8px;"></span>Salvando...';
-    saveBtn.disabled = true;
-    
-    try {
-        alert("FETCH POST")
-        const response = await fetch('/anotacoes/nova/', {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-CSRFToken': getCSRFToken()
-            }
-        });
-        
-        if (response.ok) {
-            // Sucesso - recarregar página
-            window.location.reload();
-        } else {
-            // Erro
-            const errorData = await response.json();
-            showError('Erro ao salvar nota: ' + (errorData.message || 'Erro desconhecido'));
-        }
-    } catch (error) {
-        showError('Erro de conexão. Tente novamente.');
-        console.error('Erro:', error);
-    } finally {
-        // Restaurar botão
-        saveBtn.innerHTML = '<span class="save-icon">💾</span>Salvar';
-        saveBtn.disabled = false;
-    }
-}
 
 // Obter CSRF token
-function getCSRFToken() {
-    const cookieValue = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('csrftoken='))
-        ?.split('=')[1];
-    return cookieValue || '';
-}
+
 
 // Mostrar erro
 function showError(message) {
