@@ -8,7 +8,7 @@
 
 <div class="notas-container">
     {% for note in notes %}
-        <div class="nota-card" onclick="openNoteModal({{ note.id }})">
+        <div class="nota-card" id="note-{{ note.id }}"onclick="openNoteModal({{ note.id }})">
             <div style="flex:1">
                 <div style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; max-width:100%;">
                     {{ note.content|truncatechars:85 }}
@@ -24,10 +24,12 @@
 
 <div class="modal-overlay" id="modalOverlay" style="display: none;">
 	<div class="modal-content">
-	  <h2 id="noteTitle"></h2>
+	  <h2 class="note-title" id="noteTitle"></h2>
 	  <p id="noteContent"></p>
 	  <div class="form-actions">
-		<button class="btn btn-secondary" onclick="closeNoteModal()">Fechar</button>
+		<button class="btn btn-excluir" onclick="deleteNote()">Excluir</button>
+		<button class="btn btn-secondary" onclick="editNote()">Editar</button>
+		<button class="btn btn-secondary" onclick="closeModal()">Fechar</button>
 	  </div>
 	</div>
   </div>
@@ -35,6 +37,7 @@
 {% endblock content %}
 
 {% block scripts %}
+<script src="{% static 'js/modal.js' %}"></script>
 <script>
 	let NOTES = [
     {% for note in notes %}
@@ -46,17 +49,44 @@
     {% endfor %}
 	];
 
+	let currentNoteId = null;
+
 	function openNoteModal(noteId) {
+
 		const note = NOTES.find(n => n.id === noteId);
 		if (note) {
-		  document.getElementById("noteTitle").innerText = note.title;
-		  document.getElementById("noteContent").innerText = note.content;
-		  document.getElementById("modalOverlay").style.display = "flex";
+			currentNoteId = note.id;
+			console.log(note.id)
+			document.getElementById("noteTitle").innerText = note.title;
+			document.getElementById("noteContent").innerText = note.content;
+			document.getElementById("modalOverlay").style.display = "flex";
 		}
-	  }
-	
-	  function closeNoteModal() {
-		document.getElementById("modalOverlay").style.display = "none";
-	  }
+	}
+
+	function deleteNote() {
+		if (!currentNoteId) return
+
+		if (!confirm("Tem certeza que deseja excluir essa nota?")) return;
+		
+		fetch(`${currentNoteId}/deletar/`, {
+			method: 'POST',
+			headers: {
+				'X-Requested-With': 'XMLHttpRequest',
+				'X-CSRFToken': getCookie('csrftoken'),
+			}
+		})
+		.then(response => response.json())
+		.then(data => {
+		if (data.success) {
+			alert("Nota excluída com sucesso!");
+			// Remove visualmente da página
+			document.querySelector(`#note-${currentNoteId}`)?.remove();
+			closeModal();
+		  } else {
+			alert("Erro ao excluir.");
+		  }
+		});
+	}
+
 </script>
 {% endblock scripts %}
