@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from django.http import JsonResponse
 # Create your views here.
 
 from django.shortcuts import render, redirect, get_object_or_404
@@ -39,8 +39,8 @@ def note_edit(request, pk):
 
 @login_required
 def note_delete(request, pk):
-    note = get_object_or_404(Note, pk=pk, user=request.user)
-    if request.method == 'POST':
+    if request.method == 'POST' and request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        note = get_object_or_404(Note, pk=pk, user=request.user)
         note.delete()
-        return redirect('note_list')
-    return render(request, 'anotacoes/note_confirm_delete.html', {'note': note})
+        return JsonResponse({'success': True})
+    return JsonResponse({'success': False}, status=400)
