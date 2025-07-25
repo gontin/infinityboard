@@ -23,7 +23,7 @@
 }
 .nota-card:hover {
     transform: scale(1.03);
-    background: #444;
+    background: var(--card-bg);
 }
 .nota-title {
     font-weight: bold;
@@ -80,7 +80,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: rgba(10, 10, 10, 0.85); /* Fundo preto translúcido */
+    background: var(--modal-bg); /* Fundo preto translúcido */
     justify-content: center;
     align-items: center;
     transition: background 0.3s;
