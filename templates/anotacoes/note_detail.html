@@ -1,0 +1,15 @@
+{% extends "anotacoes/base_notas.html" %}
+
+{% block content %}
+<!-- Modal de Visualização de Nota -->
+<div class="modal-overlay" id="noteViewModal">
+  <div class="modal-content">
+    <h2 id="noteTitle">{{ note.title }}</h2>
+    <p id="noteContent">{{ note.content }}</p>
+    <div class="form-actions">
+      <button type="button" class="btn btn-secondary"><a href="{% url "note_list" %}">Voltar</a></button>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
