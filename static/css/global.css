@@ -16,7 +16,7 @@
 }
 
 /* Variáveis CSS para tema escuro */
-body.dark-mode {
+html.dark-mode {
     --bg-primary: #1c1919;
     --bg-secondary: #292929;
     --card-bg: #404040;

@@ -1,0 +1,237 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Planilhas - Infinity School{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/planilhas.css' %}">
+{% endblock %}
+
+{% block header_title %}Planilhas{% endblock %}
+
+{% block header %}
+<nav class="nav-menu">
+    <div class="left-menu">
+        <a href="{% url 'inicio' %}" class="btn btn-secondary">Dashboard</a>
+        <a href="{% url 'perfil' %}" class="btn btn-secondary">Perfil</a>
+        <a href="{% url 'note_list' %}" class="btn btn-secondary">Anotações</a>
+        <a href="{% url 'planilhas' %}" class="btn btn-primary">Anotações</a>
+    </div>
+
+    <div class="right-menu">
+        <div class="profile-container">
+            <img src="{{ user.perfil.foto }}" alt="Foto de Perfil" class="profile-img">
+            <span class="username">{{ user.perfil }}</span>
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Logout</button>
+            </form>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="planilhas-container">
+    <!-- Seção de ações principais -->
+    <div class="actions-section">
+        <button class="btn btn-primary" id="nova-turma-btn">
+            <i class="icon-plus"></i>
+            Nova Turma
+        </button>
+    </div>
+
+    <!-- Lista de turmas -->
+    <div class="turmas-grid" id="turmas-grid">
+        <!-- Turmas serão carregadas aqui via JavaScript -->
+    </div>
+
+    <!-- Modal para nova turma -->
+    <div class="modal" id="modal-nova-turma">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Nova Turma</h3>
+                <button class="modal-close" data-modal="modal-nova-turma">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="form-nova-turma">
+                    <div class="form-group">
+                        <label for="numero-turma">Número da Turma</label>
+                        <input type="text" id="numero-turma" name="numero" placeholder="Ex: T001, Turma 1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="curso-modulo-turma">Curso/Módulo</label>
+                        <input type="text" id="curso-modulo-turma" name="curso_modulo" placeholder="Ex: Python Básico, React Avançado" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="periodo-turma">Período</label>
+                        <select id="periodo-turma" name="periodo" required>
+                            <option value="">Selecione o período</option>
+                            <option value="matutino">Matutino</option>
+                            <option value="vespertino">Vespertino</option>
+                            <option value="noturno">Noturno</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="dias-semana-turma">Dias da Semana</label>
+                        <input type="text" id="dias-semana-turma" name="dias_semana" placeholder="Ex: Segunda, Quarta, Sexta" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-modal="modal-nova-turma">Cancelar</button>
+                <button type="submit" form="form-nova-turma" class="btn btn-primary">Criar Turma</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para editar turma -->
+    <div class="modal" id="modal-editar-turma">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Editar Turma</h3>
+                <button class="modal-close" data-modal="modal-editar-turma">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="form-editar-turma">
+                    <input type="hidden" id="edit-turma-id" name="id">
+                    <div class="form-group">
+                        <label for="edit-numero-turma">Número da Turma</label>
+                        <input type="text" id="edit-numero-turma" name="numero" placeholder="Ex: T001, Turma 1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-curso-modulo-turma">Curso/Módulo</label>
+                        <input type="text" id="edit-curso-modulo-turma" name="curso_modulo" placeholder="Ex: Python Básico, React Avançado" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-periodo-turma">Período</label>
+                        <select id="edit-periodo-turma" name="periodo" required>
+                            <option value="">Selecione o período</option>
+                            <option value="matutino">Matutino</option>
+                            <option value="vespertino">Vespertino</option>
+                            <option value="noturno">Noturno</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-dias-semana-turma">Dias da Semana</label>
+                        <input type="text" id="edit-dias-semana-turma" name="dias_semana" placeholder="Ex: Segunda, Quarta, Sexta" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-modal="modal-editar-turma">Cancelar</button>
+                <button type="submit" form="form-editar-turma" class="btn btn-primary">Salvar Alterações</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para gerenciar alunos -->
+    <div class="modal modal-large" id="modal-gerenciar-alunos">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Gerenciar Alunos - <span id="turma-nome-header"></span></h3>
+                <button class="modal-close" data-modal="modal-gerenciar-alunos">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="alunos-actions">
+                    <button class="btn btn-primary" id="adicionar-aluno-btn">
+                        <i class="icon-plus"></i>
+                        Adicionar Aluno
+                    </button>
+                    <button class="btn btn-success" id="exportar-planilha-btn">
+                        <i class="icon-download"></i>
+                        Exportar Planilha
+                    </button>
+                    <button class="btn btn-info" id="importar-planilha-btn">
+                        <i class="icon-upload"></i>
+                        Importar Planilha
+                    </button>
+                </div>
+                
+                <div class="alunos-table-container">
+                    <table class="alunos-table" id="alunos-table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Telefone</th>
+                                <th>Data de Nascimento</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="alunos-tbody">
+                            <!-- Alunos serão carregados aqui -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para adicionar/editar aluno -->
+    <div class="modal" id="modal-aluno">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-aluno-title">Adicionar Aluno</h3>
+                <button class="modal-close" data-modal="modal-aluno">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="form-aluno">
+                    <input type="hidden" id="aluno-id" name="id">
+                    <input type="hidden" id="aluno-turma-id" name="turma_id">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="aluno-nome">Nome Completo</label>
+                            <input type="text" id="aluno-nome" name="nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="aluno-email">Email</label>
+                            <input type="email" id="aluno-email" name="email" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="aluno-telefone">Telefone</label>
+                            <input type="tel" id="aluno-telefone" name="telefone">
+                        </div>
+                        <div class="form-group">
+                            <label for="aluno-nascimento">Data de Nascimento</label>
+                            <input type="date" id="aluno-nascimento" name="data_nascimento">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="aluno-endereco">Endereço</label>
+                        <textarea id="aluno-endereco" name="endereco" rows="2"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-modal="modal-aluno">Cancelar</button>
+                <button type="submit" form="form-aluno" class="btn btn-primary" id="salvar-aluno-btn">Salvar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de confirmação -->
+    <div class="modal" id="modal-confirmacao">
+        <div class="modal-content modal-small">
+            <div class="modal-header">
+                <h3>Confirmar Ação</h3>
+                <button class="modal-close" data-modal="modal-confirmacao">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmacao-texto">Tem certeza que deseja realizar esta ação?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-modal="modal-confirmacao">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirmar-acao-btn">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/planilhas.js' %}"></script>
+{% endblock %}
+

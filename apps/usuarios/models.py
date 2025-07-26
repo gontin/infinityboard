@@ -24,3 +24,38 @@ class Tarefa(models.Model):
 
     def __str__(self):
         return f"{self.titulo} ({self.tipo})"
+class Turma(models.Model):
+    TURNO_CHOICES = [
+        ('M', 'Manhã'),
+        ('T', 'Tarde'),
+        ('N', 'Noite'),
+    ]
+
+    TIPO_AULA_CHOICES = [
+        ('curso', 'Curso'),
+        ('compartilhada', 'Compartilhada'),
+        ('sm', 'Super Módulo')
+    ]
+
+    numero = models.CharField(max_length=10)
+    turno = models.CharField(max_length=1, choices=TURNO_CHOICES)
+    aula = models.CharField(max_length=100)
+    modulo = models.CharField(max_length=50)
+    curso = models.CharField(max_length=100)
+    horario_inicio = models.TimeField()
+    horario_fim = models.TimeField()
+    tipo_aula = models.CharField(max_length=20, choices=TIPO_AULA_CHOICES)
+    dia_semana = models.CharField(
+        max_length=10, 
+        blank=True, 
+        null=True, 
+        help_text='Preencher se for aula recorrente'
+    )
+    data_unica = models.DateField(
+        blank=True, 
+        null=True, 
+        help_text='Preencher se for aula única'
+    )
+
+    def __str__(self):
+        return f"{self.numero} - {self.aula} ({self.get_turno_display()})"
