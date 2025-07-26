@@ -3,219 +3,20 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <script>
+        (function() {
+            try {
+                if (localStorage.getItem('tema') === 'escuro') {
+                    document.documentElement.classList.add('dark-mode');
+                    document.body && document.body.classList.add('dark-mode');
+                }
+            } catch (e) {}
+        })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Infinity School{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <style>
-        /* CSS do botão de tema customizado */
-        .theme__icon {
-            width: 40px;
-            height: 40px;
-            padding: 4px;
-            overflow: hidden;
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 9999;
-            border: none;
-            background: rgba(255, 255, 255, 0.1);
-            cursor: pointer;
-            font-family: inherit;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-        }
-
-        .theme__icon:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-            transform: scale(1.05);
-        }
-
-        .theme__icon:active {
-            transform: scale(0.95);
-        }
-
-        /* Sol (círculo central) */
-        .theme__icon > :nth-child(1) {
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            border: 1px solid var(--text-primary, #212121);
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #ffd700;
-            transition: all .4s ease;
-            z-index: 10;
-        }
-
-        .theme__icon:hover > :nth-child(1) {
-            width: 26px;
-            height: 26px;
-            border: 1px solid var(--bg-primary, #f5f5f7);
-            background-color: var(--bg-primary, #f5f5f7);
-        }
-
-        /* Container dos raios do sol */
-        .theme__icon > :nth-child(2) {
-            width: 28px;
-            height: 28px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            transition: transform .4s ease;
-        }
-
-        .theme__icon:hover > :nth-child(2) {
-            transform: translate(-50%, -50%) rotate(-45deg) scale(.8);
-        }
-
-        /* Raio vertical */
-        .theme__icon > :nth-child(2) > :nth-child(1) {
-            display: block;
-            width: 2px;
-            height: 28px;
-            border-radius: 2px;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #ffd700;
-            transition: background-color .3s ease;
-        }
-
-        /* Raio horizontal */
-        .theme__icon > :nth-child(2) > :nth-child(2) {
-            display: block;
-            width: 28px;
-            height: 2px;
-            border-radius: 2px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #ffd700;
-            transition: background-color .3s ease;
-        }
-
-        /* Raio diagonal 1 */
-        .theme__icon > :nth-child(2) > :nth-child(3) {
-            display: block;
-            width: 28px;
-            height: 2px;
-            border-radius: 2px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(45deg);
-            background-color: #ffd700;
-            transition: background-color .3s ease;
-        }
-
-        /* Raio diagonal 2 */
-        .theme__icon > :nth-child(2) > :nth-child(4) {
-            display: block;
-            width: 28px;
-            height: 2px;
-            border-radius: 2px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotate(-45deg);
-            background-color: #ffd700;
-            transition: background-color .3s ease;
-        }
-
-        /* Lua (círculo que se move) */
-        .theme__icon > :nth-child(3) {
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 100%;
-            transform: translateY(-50%);
-            background-color: var(--text-primary, #212121);
-            transition: all .4s ease;
-            transition-delay: .2s;
-            z-index: 20;
-        }
-
-        .theme__icon:hover > :nth-child(3) {
-            top: 30%;
-            left: 35%;
-        }
-
-        /* Adaptações para tema escuro */
-        body.dark-mode .theme__icon {
-            background: rgba(0, 0, 0, 0.3);
-        }
-
-        body.dark-mode .theme__icon:hover {
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-
-        body.dark-mode .theme__icon > :nth-child(1) {
-            background-color: #4a5568;
-            border-color: var(--text-primary, #ffffff);
-        }
-
-        body.dark-mode .theme__icon > :nth-child(2) > span {
-            background-color: #4a5568 !important;
-        }
-
-        body.dark-mode .theme__icon > :nth-child(3) {
-            background-color: #ffd700;
-        }
-
-        body.dark-mode .theme__icon:hover > :nth-child(1) {
-            background-color: var(--bg-primary, #2d3748);
-            border-color: var(--text-primary, #ffffff);
-        }
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .theme__icon {
-                top: 15px;
-                right: 15px;
-                width: 36px;
-                height: 36px;
-            }
-            
-            .theme__icon > :nth-child(1) {
-                width: 14px;
-                height: 14px;
-            }
-            
-            .theme__icon:hover > :nth-child(1) {
-                width: 22px;
-                height: 22px;
-            }
-            
-            .theme__icon > :nth-child(2) {
-                width: 24px;
-                height: 24px;
-            }
-            
-            .theme__icon > :nth-child(2) > span {
-                width: 24px !important;
-                height: 24px !important;
-            }
-            
-            .theme__icon > :nth-child(2) > :nth-child(1) {
-                height: 24px !important;
-            }
-            
-            .theme__icon > :nth-child(3) {
-                width: 18px;
-                height: 18px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
     {% block head %}{% endblock %}
 </head>
 <body>
@@ -255,8 +56,8 @@
 
             // Event listener para alternar tema
             themeToggle.addEventListener('click', () => {
-                const newDarkMode = document.body.classList.toggle('dark-mode');
-                
+            const newDarkMode = document.documentElement.classList.toggle('dark-mode');
+            document.body.classList.toggle('dark-mode');
                 // Salva no localStorage
                 localStorage.setItem('tema', newDarkMode ? 'escuro' : 'claro');
                 

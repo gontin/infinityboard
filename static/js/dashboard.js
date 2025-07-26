@@ -130,8 +130,14 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => {
                 console.error('Erro:', error);
                 alert('Erro ao salvar tarefa');
-            });
+            })
+            .finally(() => {
+            setTimeout(() => {
+                if (btn) btn.disabled = false;
+            }, 2000); // espera 2 segundos antes de reabilitar
         });
+    });
+    
     }
 
     // Event listener para o botão cancelar
