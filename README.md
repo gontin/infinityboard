@@ -19,7 +19,7 @@ Este é um sistema web desenvolvido em Django para organização e produtividade
 - **Calendário Interativo**: Visualização mensal com navegação
 - **Lista de Tarefas**: Checklist organizado por categorias (Reunião, Entrega, Evento)
 - **Notificações**: Sistema de lembretes e avisos importantes
-- **Anotações Rápidas**: Post-it digital com cores personalizáveis
+- **Anotações Rápidas**: Post-it digital
 
 ## Estrutura do Projeto
 
@@ -32,6 +32,21 @@ projeto/
 │   ├── urls.py
 │   └── wsgi.py
 ├── apps/
+│   └── anotacoes/
+│       ├── __init__.py
+│       ├── admin.py
+│       ├── apps.py
+│       ├── forms.py
+│       ├── models.py
+│       ├── views.py
+│       └── urls.py
+│   └── planilhas/
+│       ├── __init__.py
+│       ├── admin.py
+│       ├── apps.py
+│       ├── models.py
+│       ├── views.py
+│       └── urls.py
 │   └── usuarios/
 │       ├── __init__.py
 │       ├── admin.py
@@ -40,20 +55,33 @@ projeto/
 │       ├── views.py
 │       └── urls.py
 ├── templates/
+│   └── anotacoes/
+│       └── base_notas.html
+│       └── note_create.html
+│       └── note_list.html
 │   ├── base.html
+│   ├── calendario.html
 │   ├── inicio.html
+│   ├── login.html
 │   ├── perfil.html
-│   └── login.html
+│   └── registro.html
 └── static/
     └── css/
         └── style.css
+        └── base.css
+        └── forms.css
+        └── global.css
+        └── modal.css
+        └── note_list.css
+        └── planilhas.css
+        └── reset.css
 ```
 
 ## Como Executar
 
 1. **Instalar dependências**:
    ```bash
-   pip install django
+   pip install -r requirements.txt
    ```
 
 2. **Executar migrações**:
@@ -75,6 +103,8 @@ projeto/
    - Dashboard: http://localhost:8000/
    - Login: http://localhost:8000/login/
    - Perfil: http://localhost:8000/perfil/
+   - Notas: http://localhost:8000/notas/
+   - Notas: http://localhost:8000/planilhas/
    - Admin: http://localhost:8000/admin/
 
 ## URLs Configuradas
@@ -84,6 +114,8 @@ projeto/
 - `/logout/` - Logout do usuário
 - `/perfil/` - Perfil do usuário
 - `/admin/` - Painel administrativo do Django
+- `/notas/` - Painel anotações
+- `/planilhas/` - Painel planilhas
 
 ## Próximos Passos para Desenvolvimento
 
