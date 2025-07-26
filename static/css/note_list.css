@@ -1,4 +1,5 @@
 @import url(global.css);
+@import url(modal.css);
 
 /* --- CSS dinâmico pode ir para seu style.css, aqui é ilustrativo --- */
 .notas-container {
@@ -23,7 +24,7 @@
 }
 .nota-card:hover {
     transform: scale(1.03);
-    background: #444;
+    background: var(--card-bg);
 }
 .nota-title {
     font-weight: bold;
@@ -38,8 +39,9 @@
 }
 .add-note-btn {
 	text-decoration: none;
-    position: relative;
-    left: 50%;
+    position: fixed;
+    bottom: 20px;
+    right: 0;
     transform: translateX(-50%);
     z-index: 5;
     width: 48px;
@@ -59,12 +61,4 @@
 .add-note-btn:hover {
     background: var(--accent-color);
 	box-shadow: var(--shadow-hover);
-}
-
-/* --- Modal overlay --- */
-.nota-modal-bg {
-    display: none;
-    position: fixed;
-    z-index: 20;
-    top: 0;
 }
