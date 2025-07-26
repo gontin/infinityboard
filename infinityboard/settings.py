@@ -20,9 +20,9 @@ cloudinary.config(
 SECRET_KEY = config('SECRET KEY', default="valor_default_para_desenvolvimento")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 LOGIN_URL = 'login'  # nome da URL da sua página de login (como definido no urls.py)
 LOGIN_REDIRECT_URL = 'inicio'  # página para onde o usuário é redirecionado após login
@@ -53,9 +53,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'infinityboard.urls'
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 TEMPLATES = [
     {
