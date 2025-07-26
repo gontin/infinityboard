@@ -19,7 +19,7 @@ Este é um sistema web desenvolvido em Django para organização e produtividade
 - **Calendário Interativo**: Visualização mensal com navegação
 - **Lista de Tarefas**: Checklist organizado por categorias (Reunião, Entrega, Evento)
 - **Notificações**: Sistema de lembretes e avisos importantes
-- **Anotações Rápidas**: Post-it digital com cores personalizáveis
+- **Anotações Rápidas**: Post-it digital
 
 ## Estrutura do Projeto
 
@@ -32,6 +32,21 @@ projeto/
 │   ├── urls.py
 │   └── wsgi.py
 ├── apps/
+│   └── anotacoes/
+│       ├── __init__.py
+│       ├── admin.py
+│       ├── apps.py
+│       ├── forms.py
+│       ├── models.py
+│       ├── views.py
+│       └── urls.py
+│   └── planilhas/
+│       ├── __init__.py
+│       ├── admin.py
+│       ├── apps.py
+│       ├── models.py
+│       ├── views.py
+│       └── urls.py
 │   └── usuarios/
 │       ├── __init__.py
 │       ├── admin.py
@@ -40,13 +55,26 @@ projeto/
 │       ├── views.py
 │       └── urls.py
 ├── templates/
+│   └── anotacoes/
+│       └── base_notas.html
+│       └── note_create.html
+│       └── note_list.html
 │   ├── base.html
+│   ├── calendario.html
 │   ├── inicio.html
+│   ├── login.html
 │   ├── perfil.html
-│   └── login.html
+│   └── registro.html
 └── static/
     └── css/
         └── style.css
+        └── base.css
+        └── forms.css
+        └── global.css
+        └── modal.css
+        └── note_list.css
+        └── planilhas.css
+        └── reset.css
 ```
 
 ## Como Executar
