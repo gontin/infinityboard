@@ -2,24 +2,25 @@ from pathlib import Path
 import cloudinary
 import cloudinary.uploader
 import os
+from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 CAMINHO_CREDENCIAIS = BASE_DIR / 'infinityboard-calendario.json'
-CALENDAR_ID = 'yuumizinham@gmail.com'
+CALENDAR_ID = config('CALENDAR_ID', default = "teste@gmail.com")
 
 # ATENÇÃO TIRA DPS WAWAWAWAWA
 cloudinary.config( 
   cloud_name = 'dlockrowv', 
-  api_key = '657389947585314', 
-  api_secret = 'rcz3JGtM0wzKz3dJCsiBweTDU-c',
+  api_key = config('CLOUDINARY_API', default="1"), 
+  api_secret = config('CLOUDINARY_SECRET', default="2"),
   secure = True
 )
 
-SECRET_KEY = 'django-insecure-sg71tjfs5*vv)j*kw*tq*rg3lq@_6$qmot&r@9dz4lhe3^wj+a'
+SECRET_KEY = config('SECRET KEY', default="valor_default_para_desenvolvimento")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
