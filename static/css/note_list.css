@@ -4,6 +4,8 @@
 /* --- CSS dinâmico pode ir para seu style.css, aqui é ilustrativo --- */
 .notas-container {
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 32px;
     padding: 80px 32px 0 32px;
@@ -12,7 +14,7 @@
     background: var(--bg-secondary);
     border-radius: 24px;
     padding: 24px;
-    width: 260px;
+    width: 300px;
     height: 150px;
     box-shadow: 0 0 8px #2225;
     display: flex;
@@ -22,10 +24,18 @@
     color: var(--text-primary);
     transition: transform .1s;
 }
+
 .nota-card:hover {
     transform: scale(1.03);
     background: var(--card-bg);
 }
+
+@media (max-width: 768px) {
+    .nota-card {
+        width: 100%;
+    }
+}
+
 .nota-title {
     font-weight: bold;
     font-size: 1.1rem;
