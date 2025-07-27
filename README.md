@@ -112,6 +112,7 @@ projeto/
 - `/` - Dashboard principal
 - `/login/` - Página de login
 - `/logout/` - Logout do usuário
+- `/registro/` - Tela registro
 - `/perfil/` - Perfil do usuário
 - `/admin/` - Painel administrativo do Django
 - `/notas/` - Painel anotações
@@ -125,50 +126,43 @@ projeto/
    - Integrar com sistema de usuários do Django
    - Implementar controle de acesso por perfil
    - Adicionar recuperação de senha
+   - Funcionários com permissões para registrar
 
-2. **Banco de Dados**:
-   - Criar models para Tarefas, Anotações, Notificações
-   - Implementar CRUD completo
-   - Adicionar relacionamentos entre usuários e dados
-
-3. **Integração com Google**:
-   - Google Calendar API
+2. **Integração com Google**:
    - Google Drive API
    - Google Sheets API
 
-4. **Funcionalidades Avançadas**:
+3. **Funcionalidades Avançadas**:
    - Sistema de notificações em tempo real
    - Upload de arquivos e fotos
    - Relatórios e estatísticas
    - Chat interno entre funcionários
 
-5. **Melhorias de UX/UI**:
-   - Animações e transições
+4. **Melhorias de UX/UI**:
    - Componentes interativos avançados
-   - PWA (Progressive Web App)
    - Notificações push
 
 ### 🎨 Customização Visual
 
-O arquivo `static/css/style.css` contém:
+O arquivo `static/css/global.css` contém:
 - Variáveis CSS para cores da marca Infinity School
-- Sistema de grid responsivo
-- Componentes reutilizáveis
 - Suporte a modo escuro/claro
+  
+O arquivo `static/css/global.css` contém:
+- Componentes reutilizáveis
+- Variáveis de estilização
 
 ### 🔧 Configurações Técnicas
 
 - **Django 5.2+**
 - **Python 3.11+**
-- **SQLite** (desenvolvimento) - pode ser migrado para PostgreSQL
+- **SQLite** (desenvolvimento) - pode ser migrado
 - **Timezone**: America/Sao_Paulo
 - **Idioma**: Português Brasil
 
 ## Observações Importantes
 
-- O sistema atual usa autenticação simulada para desenvolvimento
-- Todas as funcionalidades JavaScript são client-side (localStorage)
-- Os dados não são persistidos no banco ainda
+- O sistema atual usa autenticação local
 - O design segue as cores e identidade da Infinity School
 
 ## Suporte
