@@ -24,29 +24,23 @@ Este é um sistema web desenvolvido em Django para organização e produtividade
 ## Estrutura do Projeto
 
 ```
-projeto/
-├── manage.py
-├── projeto/
-│   ├── __init__.py
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
+infinityboard/
 ├── apps/
-│   └── anotacoes/
-│       ├── __init__.py
-│       ├── admin.py
-│       ├── apps.py
-│       ├── forms.py
-│       ├── models.py
-│       ├── views.py
-│       └── urls.py
-│   └── planilhas/
-│       ├── __init__.py
-│       ├── admin.py
-│       ├── apps.py
-│       ├── models.py
-│       ├── views.py
-│       └── urls.py
+│   ├── anotacoes/
+│   │   ├── __init__.py
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── forms.py
+│   │   ├── models.py
+│   │   ├── views.py
+│   │   └── urls.py
+│   ├── planilhas/
+│   │   ├── __init__.py
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── models.py
+│   │   ├── views.py
+│   │   └── urls.py
 │   └── usuarios/
 │       ├── __init__.py
 │       ├── admin.py
@@ -54,57 +48,82 @@ projeto/
 │       ├── models.py
 │       ├── views.py
 │       └── urls.py
+├── infinityboard/
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├─── static/
+│   ├── css/
+│   │   ├── base.css
+│   │   ├── global.css
+│   │   ├── note_list.css
+│   │   ├── reset.css
+│   │   ├── forms.css 
+│   │   ├── modal.css 
+│   │   ├── planilhas.css 
+│   │   └── style.css
+│   └── js/
+│       ├── dashboard.js
+│       ├── modal.js
+│       ├── note-create.js
+│       └── planilhas.js
 ├── templates/
-│   └── anotacoes/
-│       └── base_notas.html
-│       └── note_create.html
-│       └── note_list.html
-│   ├── base.html
+│   ├──anotacoes/
+│   │   ├── base_notas.html
+│   │   ├── note_list.html
+│   │   └── note_create.html
 │   ├── calendario.html
-│   ├── inicio.html
 │   ├── login.html
-│   ├── perfil.html
-│   └── registro.html
-└── static/
-    └── css/
-        └── style.css
-        └── base.css
-        └── forms.css
-        └── global.css
-        └── modal.css
-        └── note_list.css
-        └── planilhas.css
-        └── reset.css
+│   ├── registro.html
+│   ├── base.html
+│   ├── inicio.html
+│   └── perfil.html  
+├── .gitignore
+├── manage.py
+├── README.md
+└── requirements.txt
 ```
 
-## Como Executar
+## Como Executar Localmente
 
-1. **Instalar dependências**:
+1. **Iniciar Venv**:
+   ```bash
+   python -m venv venv
+   ```
+
+2. **Acessar Venv**:
+   ```bash
+   venv/Scripts/activate
+   ```
+
+3. **Instalar dependências**:
    ```bash
    pip install -r requirements.txt
    ```
 
-2. **Executar migrações**:
+4. **Executar migrações**:
    ```bash
    python manage.py migrate
    ```
 
-3. **Criar superusuário** (opcional):
+5. **Criar superusuário** (opcional):
    ```bash
    python manage.py createsuperuser
    ```
 
-4. **Executar servidor**:
+6. **Executar servidor**:
    ```bash
    python manage.py runserver
    ```
 
-5. **Acessar o sistema**:
+7. **Acessar o sistema**:
    - Dashboard: http://localhost:8000/
    - Login: http://localhost:8000/login/
+   - Registro: http://localhost:8000/registro/
    - Perfil: http://localhost:8000/perfil/
    - Notas: http://localhost:8000/notas/
-   - Notas: http://localhost:8000/planilhas/
+   - Planilhas: http://localhost:8000/planilhas/
    - Admin: http://localhost:8000/admin/
 
 ## URLs Configuradas
@@ -112,6 +131,7 @@ projeto/
 - `/` - Dashboard principal
 - `/login/` - Página de login
 - `/logout/` - Logout do usuário
+- `/registro/` - Tela registro
 - `/perfil/` - Perfil do usuário
 - `/admin/` - Painel administrativo do Django
 - `/notas/` - Painel anotações
@@ -125,53 +145,41 @@ projeto/
    - Integrar com sistema de usuários do Django
    - Implementar controle de acesso por perfil
    - Adicionar recuperação de senha
+   - Funcionários com permissões para registrar
 
-2. **Banco de Dados**:
-   - Criar models para Tarefas, Anotações, Notificações
-   - Implementar CRUD completo
-   - Adicionar relacionamentos entre usuários e dados
-
-3. **Integração com Google**:
-   - Google Calendar API
+2. **Integração com Google**:
    - Google Drive API
    - Google Sheets API
 
-4. **Funcionalidades Avançadas**:
+3. **Funcionalidades Avançadas**:
    - Sistema de notificações em tempo real
    - Upload de arquivos e fotos
    - Relatórios e estatísticas
    - Chat interno entre funcionários
 
-5. **Melhorias de UX/UI**:
-   - Animações e transições
+4. **Melhorias de UX/UI**:
    - Componentes interativos avançados
-   - PWA (Progressive Web App)
    - Notificações push
 
 ### 🎨 Customização Visual
 
-O arquivo `static/css/style.css` contém:
+O arquivo `static/css/global.css` contém:
 - Variáveis CSS para cores da marca Infinity School
-- Sistema de grid responsivo
-- Componentes reutilizáveis
 - Suporte a modo escuro/claro
+  
+O arquivo `static/css/global.css` contém:
+- Componentes reutilizáveis
+- Variáveis de estilização
 
 ### 🔧 Configurações Técnicas
 
 - **Django 5.2+**
 - **Python 3.11+**
-- **SQLite** (desenvolvimento) - pode ser migrado para PostgreSQL
+- **SQLite** (desenvolvimento) - pode ser migrado
 - **Timezone**: America/Sao_Paulo
 - **Idioma**: Português Brasil
 
 ## Observações Importantes
 
-- O sistema atual usa autenticação simulada para desenvolvimento
-- Todas as funcionalidades JavaScript são client-side (localStorage)
-- Os dados não são persistidos no banco ainda
+- O sistema atual usa autenticação local
 - O design segue as cores e identidade da Infinity School
-
-## Suporte
-
-Para dúvidas ou problemas, consulte a documentação do Django ou entre em contato com a equipe de desenvolvimento.
-
