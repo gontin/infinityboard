@@ -133,6 +133,13 @@ CLOUD_NAME=seu_cloud_name
 API_KEY=sua_api_key
 API_SECRET=sua_api_secret
 ```
+## 🔐 Token Google API
 
-Essas variáveis serão usadas para autenticar sua conta Cloudinary e permitir o upload de imagens.  
-Certifique-se de **não compartilhar** o conteúdo do `.env` publicamente ou versionar esse arquivo no Git.
+Para utilizar o serviço do google calendar, é necessário criar um uma conta de serviço `utils/` na raiz do projeto com os seguintes dados:
+
+```
+Token.json
+```
+
+Essas variáveis serão usadas para autenticar sua conta ao google calendar  
+Certifique-se de **não compartilhar** o conteúdo do `Token.js` publicamente ou versionar esse arquivo no Git.
