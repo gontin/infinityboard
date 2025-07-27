@@ -1,4 +1,5 @@
 from pathlib import Path
+from decouple import config, Csv
 import cloudinary
 import cloudinary.uploader
 import os
@@ -10,9 +11,9 @@ CALENDAR_ID = 'yuumizinham@gmail.com'
 
 # ATENÇÃO TIRA DPS WAWAWAWAWA
 cloudinary.config( 
-  cloud_name = 'dlockrowv', 
-  api_key = '657389947585314', 
-  api_secret = 'rcz3JGtM0wzKz3dJCsiBweTDU-c',
+  cloud_name = config('CLOUD_NAME')
+  api_key = config('API_KEY')
+  api_secret = config('API_SECRET'),
   secure = True
 )
 
@@ -21,8 +22,8 @@ SECRET_KEY = 'django-insecure-sg71tjfs5*vv)j*kw*tq*rg3lq@_6$qmot&r@9dz4lhe3^wj+a
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['.onrender.com']
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 LOGIN_URL = 'login'  # nome da URL da sua página de login (como definido no urls.py)
 LOGIN_REDIRECT_URL = 'inicio'  # página para onde o usuário é redirecionado após login
 LOGOUT_REDIRECT_URL = 'login'  # página após logout (opcional)
