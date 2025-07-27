@@ -4,11 +4,18 @@
 
 Este é um sistema web desenvolvido em Django para organização e produtividade dos funcionários da Infinity School. O sistema oferece um dashboard centralizado com ferramentas essenciais para o dia a dia dos colaboradores.
 
+## Tecnologias Utilizadas
+
+- **Python**
+- **JavaScript**
+- **Django**
+
+
 ## Funcionalidades Implementadas
 
 ### ✅ Funcionalidades Básicas
 - **Dashboard Principal**: Tela inicial com menu central e cards organizados
-- **Sistema de Login**: Autenticação básica
+- **Sistema de Login**: Autenticação básica com usuários do Django
 - **Perfil do Usuário**: Página de perfil com informações pessoais e profissionais
 - **Design Responsivo**: Layout adaptável para desktop e mobile
 - **Modo Escuro/Claro**: Toggle entre temas com persistência local
@@ -142,7 +149,6 @@ infinityboard/
 ### 🔄 Funcionalidades a Implementar
 
 1. **Autenticação Real**:
-   - Integrar com sistema de usuários do Django
    - Implementar controle de acesso por perfil
    - Adicionar recuperação de senha
    - Funcionários com permissões para registrar
@@ -163,12 +169,15 @@ infinityboard/
 
 ### 🎨 Customização Visual
 
-O arquivo `static/css/global.css` contém:
+O arquivo `static/css/style.css` contém:
 - Variáveis CSS para cores da marca Infinity School
-- Suporte a modo escuro/claro
+- Definições b
   
-O arquivo `static/css/global.css` contém:
+O arquivo `static/css/base.css` contém:
 - Componentes reutilizáveis
+- Suporte a modo escuro/claro
+
+O arquivo `static/css/global.css` contém:
 - Variáveis de estilização
 
 ### 🔧 Configurações Técnicas
