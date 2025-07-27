@@ -164,8 +164,3 @@ O arquivo `static/css/global.css` contém:
 
 - O sistema atual usa autenticação local
 - O design segue as cores e identidade da Infinity School
-
-## Suporte
-
-Para dúvidas ou problemas, consulte a documentação do Django ou entre em contato com a equipe de desenvolvimento.
-
