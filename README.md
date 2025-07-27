@@ -68,7 +68,7 @@ infinityboard/
 │       ├── modal.js
 │       ├── note-create.js
 │       └── planilhas.js
-└── templates/
+├── templates/
 │   ├──anotacoes/
 │   │   ├── base_notas.html
 │   │   ├── note_list.html
