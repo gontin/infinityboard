@@ -1,194 +1,124 @@
-# Sistema de Produtividade Infinity School
 
-## Descrição do Projeto
+# Sistema de Produtividade – Infinity School
 
-Este é um sistema web desenvolvido em Django para organização e produtividade dos funcionários da Infinity School. O sistema oferece um dashboard centralizado com ferramentas essenciais para o dia a dia dos colaboradores.
+## 📌 Descrição do Projeto
 
-## Tecnologias Utilizadas
+Este é um sistema web desenvolvido com Django, voltado para organização e produtividade dos funcionários da **Infinity School**. A plataforma oferece um dashboard centralizado com ferramentas essenciais para o dia a dia dos colaboradores, como calendário, tarefas, links úteis, anotações e mais.
 
-- **Python**
+## 🛠 Tecnologias Utilizadas
+
+- **Python 3.11+**
+- **Django 5.2+**
 - **JavaScript**
-- **Django**
-- **google-auth** #Contectar ao calendário do google
+- **Google Auth** (para integração com Google Calendar)
 
+## ✅ Funcionalidades
 
-## Funcionalidades Implementadas
+### Funcionalidades Básicas
 
-### ✅ Funcionalidades Básicas
-- **Dashboard Principal**: Tela inicial com menu central e cards organizados
-- **Sistema de Login**: Autenticação básica com usuários do Django
-- **Perfil do Usuário**: Página de perfil com informações pessoais e profissionais
-- **Design Responsivo**: Layout adaptável para desktop e mobile
-- **Modo Escuro/Claro**: Toggle entre temas com persistência local
+- **Dashboard Principal** com menu central e cards organizados
+- **Autenticação de Usuários** com sistema de login
+- **Página de Perfil** com dados pessoais e profissionais
+- **Design Responsivo** para desktop e dispositivos móveis
+- **Modo Claro/Escuro** com persistência local
 
-### ✅ Recursos do Dashboard
-- **Links para Planilhas**: Acesso rápido ao Google Drive e documentos
-- **Sistemas Acadêmicos**: Links para Portal do Aluno e Infinity App
-- **Calendário Interativo**: Visualização mensal/semanal/diária com navegação
-- **Lista de Tarefas**: Checklist das Tarefas criadas
-- **Anotações Rápidas**: Post-it digital
+### Recursos do Dashboard
 
-## Estrutura do Projeto
+- **Links Rápidos**: Acesso ao Google Drive, Portal do Aluno e Infinity App
+- **Calendário Interativo**: Visualização mensal/semanal/diária com navegação dinâmica
+- **Lista de Tarefas**: Checklist de atividades
+- **Anotações Rápidas**: Post-its digitais no painel
+
+## 🗂 Estrutura do Projeto
 
 ```
 infinityboard/
 ├── apps/
 │   ├── anotacoes/
-│   │   ├── __init__.py
-│   │   ├── admin.py
-│   │   ├── apps.py
-│   │   ├── forms.py
-│   │   ├── models.py
-│   │   ├── views.py
-│   │   └── urls.py
 │   ├── planilhas/
-│   │   ├── __init__.py
-│   │   ├── admin.py
-│   │   ├── apps.py
-│   │   ├── models.py
-│   │   ├── views.py
-│   │   └── urls.py
 │   └── usuarios/
-│       ├── __init__.py
-│       ├── admin.py
-│       ├── apps.py
-│       ├── models.py
-│       ├── views.py
-│       └── urls.py
-├── infinityboard/
-│   ├── __init__.py
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
-├─── static/
+├── static/
 │   ├── css/
-│   │   ├── base.css
-│   │   ├── global.css
-│   │   ├── note_list.css
-│   │   ├── reset.css
-│   │   ├── forms.css 
-│   │   ├── modal.css 
-│   │   ├── planilhas.css 
-│   │   └── style.css
 │   └── js/
-│       ├── dashboard.js
-│       ├── modal.js
-│       ├── note-create.js
-│       └── planilhas.js
 ├── templates/
-│   ├──anotacoes/
-│   │   ├── base_notas.html
-│   │   ├── note_list.html
-│   │   └── note_create.html
-│   ├── calendario.html
-│   ├── login.html
-│   ├── registro.html
-│   ├── base.html
-│   ├── inicio.html
-│   └── perfil.html  
-├── .gitignore
+├── infinityboard/
 ├── manage.py
-├── README.md
-└── requirements.txt
+├── requirements.txt
+└── README.md
 ```
 
-## Como Executar Localmente
+## ⚙️ Como Executar o Projeto Localmente
 
-1. **Iniciar Venv**:
+1. **Criar ambiente virtual**:
    ```bash
    python -m venv venv
    ```
 
-2. **Acessar Venv**:
+2. **Ativar o ambiente virtual**:
    ```bash
-   venv/Scripts/activate
+   venv/Scripts/activate  # Windows
+   source venv/bin/activate  # Linux/macOS
    ```
 
-3. **Instalar dependências**:
+3. **Instalar as dependências**:
    ```bash
    pip install -r requirements.txt
    ```
 
-4. **Executar migrações**:
+4. **Criar as migrações**:
+   ```bash
+   python manage.py makemigrations anotacoes planilhas usuarios
+   ```
+
+5. **Aplicar as migrações**:
    ```bash
    python manage.py migrate
    ```
 
-5. **Criar superusuário** (opcional):
+6. **Criar superusuário (opcional)**:
    ```bash
    python manage.py createsuperuser
    ```
 
-6. **Executar servidor**:
+7. **Iniciar o servidor**:
    ```bash
    python manage.py runserver
    ```
 
-7. **Acessar o sistema**:
+8. **Acessar o sistema**:
    - Dashboard: http://localhost:8000/
    - Login: http://localhost:8000/login/
    - Registro: http://localhost:8000/registro/
    - Perfil: http://localhost:8000/perfil/
-   - Notas: http://localhost:8000/notas/
+   - Anotações: http://localhost:8000/notas/
    - Planilhas: http://localhost:8000/planilhas/
    - Admin: http://localhost:8000/admin/
 
-## URLs Configuradas
+## 🌐 Rotas Configuradas
 
-- `/` - Dashboard principal
-- `/login/` - Página de login
-- `/logout/` - Logout do usuário
-- `/registro/` - Tela registro
-- `/perfil/` - Perfil do usuário
-- `/admin/` - Painel administrativo do Django
-- `/notas/` - Painel anotações
-- `/planilhas/` - Painel planilhas
+- `/` — Dashboard principal  
+- `/login/` — Página de login  
+- `/logout/` — Logout  
+- `/registro/` — Registro de novo usuário  
+- `/perfil/` — Página do perfil  
+- `/admin/` — Painel administrativo  
+- `/notas/` — Painel de anotações  
+- `/planilhas/` — Painel de planilhas  
 
-## Próximos Passos para Desenvolvimento
+## 🎨 Estilo e UI/UX
 
-### 🔄 Funcionalidades a Implementar
+- O arquivo `static/css/style.css` define as cores principais da marca e o layout geral
+- `base.css` contém componentes reutilizáveis e suporte a tema escuro/claro
+- `global.css` centraliza variáveis globais de estilo
 
-1. **Autenticação Real**:
-   - Implementar controle de acesso por perfil
-   - Adicionar recuperação de senha
-   - Funcionários com permissões para registrar
+## 🧩 Configurações Técnicas
 
-2. **Integração com Google**:
-   - Google Drive API
-   - Google Sheets API
-
-3. **Funcionalidades Avançadas**:
-   - Sistema de notificações em tempo real
-   - Upload de arquivos e fotos
-   - Relatórios e estatísticas
-   - Chat interno entre funcionários
-
-4. **Melhorias de UX/UI**:
-   - Componentes interativos avançados
-   - Notificações push
-
-### 🎨 Customização Visual
-
-O arquivo `static/css/style.css` contém:
-- Variáveis CSS para cores da marca Infinity School
-- Definições b
-  
-O arquivo `static/css/base.css` contém:
-- Componentes reutilizáveis
-- Suporte a modo escuro/claro
-
-O arquivo `static/css/global.css` contém:
-- Variáveis de estilização
-
-### 🔧 Configurações Técnicas
-
-- **Django 5.2+**
-- **Python 3.11+**
-- **SQLite** (desenvolvimento) - pode ser migrado
+- **Banco de Dados**: SQLite (padrão para desenvolvimento)
+- **Idioma**: pt-br
 - **Timezone**: America/Sao_Paulo
-- **Idioma**: Português Brasil
 
-## Observações Importantes
+## 📎 Observações
 
-- O sistema atual usa autenticação local
-- O design segue as cores e identidade da Infinity School
+- O sistema utiliza autenticação local padrão do Django.
+- O visual segue a identidade visual da Infinity School.
+- A integração com serviços do Google (ex: Google Calendar) utiliza a biblioteca `google-auth`.
