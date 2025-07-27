@@ -9,6 +9,7 @@ Este é um sistema web desenvolvido em Django para organização e produtividade
 - **Python**
 - **JavaScript**
 - **Django**
+- **google-auth** #Contectar ao calendário do google
 
 
 ## Funcionalidades Implementadas
