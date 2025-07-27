@@ -102,9 +102,10 @@ projeto/
 5. **Acessar o sistema**:
    - Dashboard: http://localhost:8000/
    - Login: http://localhost:8000/login/
+   - Registro: http://localhost:8000/registro/
    - Perfil: http://localhost:8000/perfil/
    - Notas: http://localhost:8000/notas/
-   - Notas: http://localhost:8000/planilhas/
+   - Planilhas: http://localhost:8000/planilhas/
    - Admin: http://localhost:8000/admin/
 
 ## URLs Configuradas
