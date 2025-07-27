@@ -122,3 +122,19 @@ infinityboard/
 - O sistema utiliza autenticação local padrão do Django.
 - O visual segue a identidade visual da Infinity School.
 - A integração com serviços do Google (ex: Google Calendar) utiliza a biblioteca `google-auth`.
+
+
+## 🔐 Configuração do Cloudinary (.env)
+
+Para utilizar o serviço de hospedagem de imagens com **Cloudinary**, é necessário criar um arquivo `.env` na raiz do projeto com os seguintes dados:
+
+```
+CLOUD_NAME=seu_cloud_name
+API_KEY=sua_api_key
+API_SECRET=sua_api_secret
+```
+
+Essas variáveis serão usadas para autenticar sua conta Cloudinary e permitir o upload de imagens.  
+Certifique-se de **não compartilhar** o conteúdo do `.env` publicamente ou versionar esse arquivo no Git.
+
+> ✅ Dica: Adicione `.env` ao seu `.gitignore` para evitar que ele seja enviado ao GitHub.
