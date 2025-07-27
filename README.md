@@ -24,9 +24,8 @@ Este é um sistema web desenvolvido em Django para organização e produtividade
 ### ✅ Recursos do Dashboard
 - **Links para Planilhas**: Acesso rápido ao Google Drive e documentos
 - **Sistemas Acadêmicos**: Links para Portal do Aluno e Infinity App
-- **Calendário Interativo**: Visualização mensal com navegação
-- **Lista de Tarefas**: Checklist organizado por categorias (Reunião, Entrega, Evento)
-- **Notificações**: Sistema de lembretes e avisos importantes
+- **Calendário Interativo**: Visualização mensal/semanal/diária com navegação
+- **Lista de Tarefas**: Checklist das Tarefas criadas
 - **Anotações Rápidas**: Post-it digital
 
 ## Estrutura do Projeto
