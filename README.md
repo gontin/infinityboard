@@ -8,8 +8,8 @@ Este é um sistema web desenvolvido em Django para organização e produtividade
 
 ### ✅ Funcionalidades Básicas
 - **Dashboard Principal**: Tela inicial com menu central e cards organizados
-- **Sistema de Login**: Autenticação básica (simulação para desenvolvimento)
-- **Perfil do Usuário**: Página completa de perfil com informações pessoais e profissionais
+- **Sistema de Login**: Autenticação básica
+- **Perfil do Usuário**: Página de perfil com informações pessoais e profissionais
 - **Design Responsivo**: Layout adaptável para desktop e mobile
 - **Modo Escuro/Claro**: Toggle entre temas com persistência local
 
