@@ -136,5 +136,3 @@ API_SECRET=sua_api_secret
 
 Essas variáveis serão usadas para autenticar sua conta Cloudinary e permitir o upload de imagens.  
 Certifique-se de **não compartilhar** o conteúdo do `.env` publicamente ou versionar esse arquivo no Git.
-
-> ✅ Dica: Adicione `.env` ao seu `.gitignore` para evitar que ele seja enviado ao GitHub.
