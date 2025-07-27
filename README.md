@@ -83,6 +83,7 @@ infinityboard/
 ├── manage.py
 ├── README.md
 └── requirements.txt
+```
 
 ## Como Executar Localmente
 
