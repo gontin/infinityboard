@@ -24,29 +24,23 @@ Este é um sistema web desenvolvido em Django para organização e produtividade
 ## Estrutura do Projeto
 
 ```
-projeto/
-├── manage.py
-├── projeto/
-│   ├── __init__.py
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
+infinityboard/
 ├── apps/
-│   └── anotacoes/
-│       ├── __init__.py
-│       ├── admin.py
-│       ├── apps.py
-│       ├── forms.py
-│       ├── models.py
-│       ├── views.py
-│       └── urls.py
-│   └── planilhas/
-│       ├── __init__.py
-│       ├── admin.py
-│       ├── apps.py
-│       ├── models.py
-│       ├── views.py
-│       └── urls.py
+│   ├── anotacoes/
+│   │   ├── __init__.py
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── forms.py
+│   │   ├── models.py
+│   │   ├── views.py
+│   │   └── urls.py
+│   ├── planilhas/
+│   │   ├── __init__.py
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── models.py
+│   │   ├── views.py
+│   │   └── urls.py
 │   └── usuarios/
 │       ├── __init__.py
 │       ├── admin.py
@@ -54,52 +48,75 @@ projeto/
 │       ├── models.py
 │       ├── views.py
 │       └── urls.py
-├── templates/
-│   └── anotacoes/
-│       └── base_notas.html
-│       └── note_create.html
-│       └── note_list.html
-│   ├── base.html
+├── infinityboard/
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├─── static/
+│   ├── css/
+│   │   ├── base.css
+│   │   ├── global.css
+│   │   ├── note_list.css
+│   │   ├── reset.css
+│   │   ├── forms.css 
+│   │   ├── modal.css 
+│   │   ├── planilhas.css 
+│   │   └── style.css
+│   └── js/
+│       ├── dashboard.js
+│       ├── modal.js
+│       ├── note-create.js
+│       └── planilhas.js
+└── templates/
+│   ├──anotacoes/
+│   │   ├── base_notas.html
+│   │   ├── note_list.html
+│   │   └── note_create.html
 │   ├── calendario.html
-│   ├── inicio.html
 │   ├── login.html
-│   ├── perfil.html
-│   └── registro.html
-└── static/
-    └── css/
-        └── style.css
-        └── base.css
-        └── forms.css
-        └── global.css
-        └── modal.css
-        └── note_list.css
-        └── planilhas.css
-        └── reset.css
-```
+│   ├── registro.html
+│   ├── base.html
+│   ├── inicio.html
+│   └── perfil.html  
+├── .gitignore
+├── manage.py
+├── README.md
+└── requirements.txt
 
-## Como Executar
+## Como Executar Localmente
 
-1. **Instalar dependências**:
+1. **Iniciar Venv**:
+   ```bash
+   python -m venv venv
+   ```
+
+2. **Acessar Venv**:
+   ```bash
+   venv/Scripts/activate
+   ```
+
+3. **Instalar dependências**:
    ```bash
    pip install -r requirements.txt
    ```
 
-2. **Executar migrações**:
+4. **Executar migrações**:
    ```bash
    python manage.py migrate
    ```
 
-3. **Criar superusuário** (opcional):
+5. **Criar superusuário** (opcional):
    ```bash
    python manage.py createsuperuser
    ```
 
-4. **Executar servidor**:
+6. **Executar servidor**:
    ```bash
    python manage.py runserver
    ```
 
-5. **Acessar o sistema**:
+7. **Acessar o sistema**:
    - Dashboard: http://localhost:8000/
    - Login: http://localhost:8000/login/
    - Registro: http://localhost:8000/registro/
