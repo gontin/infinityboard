@@ -4,15 +4,17 @@
 /* --- CSS dinâmico pode ir para seu style.css, aqui é ilustrativo --- */
 .notas-container {
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 32px;
-    padding: 80px 32px 0 32px;
+    padding-top: 40px;
 }
 .nota-card {
     background: var(--bg-secondary);
     border-radius: 24px;
     padding: 24px;
-    width: 260px;
+    width: 30%;
     height: 150px;
     box-shadow: 0 0 8px #2225;
     display: flex;
@@ -22,10 +24,43 @@
     color: var(--text-primary);
     transition: transform .1s;
 }
+
 .nota-card:hover {
     transform: scale(1.03);
     background: var(--card-bg);
 }
+
+@media (max-width: 768px) {
+    main {
+        padding: 16px 0;
+    }
+
+    .notas-container {
+        padding: 32px 0 0 0;
+    }
+    .nota-card {
+        width: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .notas-container {
+        padding: 0;
+        gap: 16px;
+    }
+    .nota-card {
+        width: 100%;
+        border-radius: 0
+    }
+
+    .add-note-btn {
+        position: absolute;
+        bottom: 16px;
+        left: 50%;
+    }
+}
+
+
 .nota-title {
     font-weight: bold;
     font-size: 1.1rem;
@@ -59,6 +94,5 @@
     transition: background .2s;
 }
 .add-note-btn:hover {
-    background: var(--accent-color);
-	box-shadow: var(--shadow-hover);
+    background: var(--accent-color-hover);
 }

@@ -3,11 +3,12 @@ from decouple import config, Csv
 import cloudinary
 import cloudinary.uploader
 import os
+from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 CAMINHO_CREDENCIAIS = BASE_DIR / 'infinityboard-calendario.json'
-CALENDAR_ID = 'yuumizinham@gmail.com'
+CALENDAR_ID = config('CALENDAR_ID', default = "teste@gmail.com")
 
 # ATENÇÃO TIRA DPS WAWAWAWAWA
 cloudinary.config( 
@@ -17,13 +18,14 @@ cloudinary.config(
   secure = True
 )
 
-SECRET_KEY = 'django-insecure-sg71tjfs5*vv)j*kw*tq*rg3lq@_6$qmot&r@9dz4lhe3^wj+a'
+SECRET_KEY = config('SECRET KEY', default="valor_default_para_desenvolvimento")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.onrender.com']
+ALLOWED_HOSTS = ['.onrender.com', '127.0.0.1', 'localhost']
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 LOGIN_URL = 'login'  # nome da URL da sua página de login (como definido no urls.py)
 LOGIN_REDIRECT_URL = 'inicio'  # página para onde o usuário é redirecionado após login
 LOGOUT_REDIRECT_URL = 'login'  # página após logout (opcional)
@@ -53,9 +55,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'infinityboard.urls'
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 TEMPLATES = [
     {

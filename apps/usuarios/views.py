@@ -73,7 +73,7 @@ def perfil(request):
                 result = upload(foto)
                 perfil.foto = result.get('secure_url')
             except CloudinaryError:
-                console.log('catapimbas')
+                print('catapimbas')
                 pass
         
         perfil.save()
@@ -158,8 +158,8 @@ def listar_tarefas_json(request):
 
 def testar_evento_google(request):
     titulo = "Evento de Teste"
-    inicio = datetime.now() + timedelta(minutes=5)
-    fim = inicio + timedelta(hours=1)
+    inicio = datetime.now() + datetime.timedelta(minutes=5)
+    fim = inicio + datetime.timedelta(hours=1)
 
     try:
         evento_id = criar_evento_google_calendar(titulo, inicio, fim)

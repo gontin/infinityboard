@@ -6,6 +6,7 @@
     --text-primary: #333333;
     --text-secondary: #666666;
     --accent-color: #ff6b6b; /* Vermelho pastel */
+    --accent-color-hover: #cb4637;
     --border-color: #e0e0e0;
     --input-bg: #9d9d9d;
     --modal-bg: rgba(189, 189, 189, 0.85);
@@ -22,6 +23,7 @@ html.dark-mode {
     --card-bg: #404040;
     --text-primary: #ffffff;
     --text-secondary: #cccccc;
+    --accent-color-hover: #ec0000;
     --accent-color: #c64132;
     --border-color: #404040;
     --input-bg: #181818;
